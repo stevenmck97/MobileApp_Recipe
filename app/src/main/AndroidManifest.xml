@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="ie.wit">
 
+    <uses-permission android:name="android.perission.INTERNET"/>
+
     <application
         android:name=".main.RecipesApp"
         android:allowBackup="true"
@@ -12,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".main.FirebaseUIActivity"
+            android:name=".main.SignInActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
