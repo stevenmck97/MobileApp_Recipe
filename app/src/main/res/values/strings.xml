@@ -18,13 +18,13 @@
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Recipes (Lab K07a)</string>
-    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_title">Test User</string>
+    <string name="nav_header_subtitle">useremail@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_recipe">Recipe</string>
-    <string name="menu_report">Report</string>
+    <string name="menu_recipe">Recipes</string>
+    <string name="menu_report">List</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_about">About Us</string>
     <string name="menu_share">Share</string>
