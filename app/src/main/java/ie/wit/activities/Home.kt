@@ -1,18 +1,23 @@
 package ie.wit.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
 import ie.wit.fragments.RecipeFragment
 import ie.wit.fragments.ReportFragment
+import ie.wit.main.SignInActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.toast
@@ -21,6 +26,7 @@ class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
+    val signout = SignInActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +77,18 @@ class Home : AppCompatActivity(),
         when (item.itemId) {
             R.id.action_recipe -> toast("You Selected Recipe")
             R.id.action_report -> toast("You Selected Report")
+            R.id.btn_sign_out -> btn_sign_out.setOnClickListener({
+                //logout
+                AuthUI.getInstance().signOut(signout)
+                    .addOnCompleteListener {
+                        btn_sign_out.isEnabled = true
+                        signout.showSignInOptions()
+                    }.addOnFailureListener {
+                        Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
+                    }
+            })
+                //logout
+
         }
         return super.onOptionsItemSelected(item)
     }

@@ -1,16 +1,16 @@
 <resources>
     <string name="app_name">Recipes</string>
-    <string name="action_recipe">Recipe</string>
-    <string name="action_report">Report</string>
-    <string name="recipeTitle">Welcome Homer</string>
-    <string name="recipeSubtitle">Please Give Generously</string>
+    <string name="action_recipe">Add a recipe</string>
+    <string name="action_report">Recipe list</string>
+    <string name="recipeTitle">Welcome</string>
+    <string name="recipeSubtitle">Add your recipes here!</string>
     <string name="recipeButton">Recipe</string>
     <string name="paypal">PayPal</string>
     <string name="direct">Direct</string>
     <string name="amount">Amount</string>
     <string name="total">Total so Far</string>
     <string name="totalSoFar">$ Total</string>
-    <string name="reportTitle">Recipess Report</string>
+    <string name="reportTitle">Recipes List</string>
     <string name="defaultAmount">00</string>
     <string name="defaultMethod">N/A</string>
     <string name="enter_amount">Enter Amount</string>
@@ -32,16 +32,12 @@
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
-    <string name="label_firebase_ui">FirebaseUI Auth</string>
-    <string name="desc_firebase_ui">Use the FirebaseUI-Android library to authenticate with Firebase.</string>
-    <string name="firebaseui_status_fmt">Firebase User: %s</string>
-    <string name="firebaseui_title_text">FirebaseUI Auth</string>
-    <string name="firebase_status_fmt">Firebase UID: %s</string>
+
     <string name="signed_in">Signed In</string>
     <string name="signed_out">Signed Out</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
-    <string name="desc_firebase_lockup">Firebase logo and name</string>
+
     <string name="id_fmt">User ID: %s</string>
 
     <string name="disconnect">Disconnect</string>
