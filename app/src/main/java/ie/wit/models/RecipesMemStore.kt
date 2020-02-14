@@ -27,6 +27,12 @@ class RecipesMemStore : RecipesStore {
             logAll()
         }
 
+//        override fun update(recipes: RecipesModel) {
+//            recipes.id = getId()
+//            recipess.add(recipes)
+//            logAll()
+//    }
+
         fun logAll() {
             Log.v("Recipe","** Recipess List **")
             recipess.forEach { Log.v("Recipe","${it}") }

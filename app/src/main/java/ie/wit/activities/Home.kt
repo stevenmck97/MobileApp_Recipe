@@ -1,6 +1,5 @@
 package ie.wit.activities
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -26,7 +25,7 @@ class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     lateinit var ft: FragmentTransaction
-    val signout = SignInActivity()
+    val signOut = SignInActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,10 +78,10 @@ class Home : AppCompatActivity(),
             R.id.action_report -> toast("You Selected Report")
             R.id.btn_sign_out -> btn_sign_out.setOnClickListener({
                 //logout
-                AuthUI.getInstance().signOut(signout)
+                AuthUI.getInstance().signOut(signOut)
                     .addOnCompleteListener {
                         btn_sign_out.isEnabled = true
-                        signout.showSignInOptions()
+                        signOut.showSignInOptions()
                     }.addOnFailureListener {
                         Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
                     }
