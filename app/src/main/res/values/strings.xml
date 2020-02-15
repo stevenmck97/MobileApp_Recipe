@@ -13,6 +13,7 @@
     <string name="menu_deleteRecipe">Delete</string>
     <string name="recipeSubtitle">Add your recipes here!</string>
     <string name="welcomeTitle">Welcome</string>
+    <string name="aboutUs">This is Steven McKeown\'s Recipe app! Please add recipes to your content!</string>
 
     <string name="reportTitle">Recipes List</string>
     <string name="enter_recipe">Enter Recipe Details</string>

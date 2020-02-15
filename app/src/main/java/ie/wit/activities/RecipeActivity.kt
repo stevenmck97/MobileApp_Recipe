@@ -14,10 +14,6 @@ import ie.wit.models.RecipesModel
 import kotlinx.android.synthetic.main.activity_recipe.*
 import android.view.Menu
 import android.view.MenuItem
-
-//import kotlinx.android.synthetic.main.activity_recipe.*
-//import kotlinx.android.synthetic.main.activity_recipe_list.*
-//import kotlinx.android.synthetic.main.card_recipe.*
 import org.jetbrains.anko.*
 
 
@@ -28,14 +24,15 @@ class RecipeActivity : AppCompatActivity(), AnkoLogger {
     var edit = false
     val IMAGE_REQUEST = 1
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
         app = application as RecipesApp
 
 
-        if (intent.hasExtra("recipe_edit"))
-        {
+        if (intent.hasExtra("recipe_edit")) {
             edit = true
             recipe = intent.extras?.getParcelable<RecipesModel>("recipe_edit")!!
             recipeTitle.setText(recipe.title)
@@ -75,26 +72,7 @@ class RecipeActivity : AppCompatActivity(), AnkoLogger {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
-
-//        setButtonListener(root)
-//        return root;
     }
-
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() =
-//            RecipeActivity().apply {
-//                arguments = Bundle().apply {}
-//            }
-//    }
-
-//    fun setButtonListener( layout: View) {
-//        layout.btnAdd.setOnClickListener {
-//
-//                app.recipes.create(RecipesModel(title = recipeTransactionmethod,amount = amount))
-//            }
-//        }
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_recipe, menu)
         if (edit && menu != null) menu.getItem(0).setVisible(true)
