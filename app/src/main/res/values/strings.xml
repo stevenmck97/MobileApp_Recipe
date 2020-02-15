@@ -1,18 +1,20 @@
 <resources>
-    <string name="app_name">Recipes</string>
-    <string name="action_recipe">Add a recipe</string>
-    <string name="action_report">Recipe list</string>
-    <string name="recipeTitle">Welcome</string>
+    <string name="app_name">Recipe List App</string>
+    <string name="button_addRecipe">Add Recipe</string>
+    <string name="hint_recipeTitle">Recipe Title</string>
+    <string name="hint_recipeDescription">Description</string>
+    <string name="menu_addRecipe">Add</string>
+    <string name="menu_cancelRecipe">Cancel</string>
+    <string name="enter_recipe_title">Please enter a Recipe Title</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="button_addImage">Add Image</string>
+    <string name="select_recipe_image">Select Recipe image</string>
+    <string name="change_recipe_image">Change Recipe image</string>
+    <string name="menu_deleteRecipe">Delete</string>
     <string name="recipeSubtitle">Add your recipes here!</string>
-    <string name="recipeButton">Recipe</string>
-    <string name="paypal">PayPal</string>
-    <string name="direct">Direct</string>
-    <string name="amount">Amount</string>
-    <string name="total">Total so Far</string>
-    <string name="totalSoFar">$ Total</string>
+    <string name="welcomeTitle">Welcome</string>
+
     <string name="reportTitle">Recipes List</string>
-    <string name="defaultAmount">00</string>
-    <string name="defaultMethod">N/A</string>
     <string name="enter_recipe">Enter Recipe Details</string>
 
     <string name="title_activity_home">Home</string>
@@ -45,19 +47,7 @@
     <string name="google_title_text">Google Sign In</string>
 
 
-    <string name="button_addRecipeApp">Add Recipe</string>
-    <string name="button_saveRecipe">Save Recipe</string>
-    <string name="button_addImage"> Add Image </string>
-    <string name="hint_recipeappTitle">Recipe Title</string>
-    <string name="hint_recipeappDescription">Recipe Description</string>
-    <string name="message_enter_title">Please enter a title</string>
-    <string name="select_recipe_image">Select Recipe image</string>
-    <string name="menu_addRecipe">Add</string>
-    <string name="menu_cancelRecipe">Cancel</string>
-    <string name="enter_recipe_title">Please enter a Recipe Title</string>
-    <string name="save_recipe">Save Recipe</string>
-    <string name="change_recipe_image">Change Recipe image</string>
-    <string name="menu_deleteRecipe">Delete</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

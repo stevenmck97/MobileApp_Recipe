@@ -1,64 +1,44 @@
-package ie.wit.fragments
+package ie.wit.activities
 
 
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import ie.wit.R
 import ie.wit.helpers.readImage
 import ie.wit.helpers.readImageFromPath
 import ie.wit.helpers.showImagePicker
 import ie.wit.main.RecipesApp
 import ie.wit.models.RecipesModel
-import kotlinx.android.synthetic.main.card_recipes.*
-import kotlinx.android.synthetic.main.fragment_recipe.*
-import kotlinx.android.synthetic.main.fragment_recipe.view.*
+import kotlinx.android.synthetic.main.activity_recipe.*
 import android.view.Menu
 import android.view.MenuItem
-//import kotlinx.android.synthetic.main.fragment_recipe.*
+
+//import kotlinx.android.synthetic.main.activity_recipe.*
 //import kotlinx.android.synthetic.main.activity_recipe_list.*
 //import kotlinx.android.synthetic.main.card_recipe.*
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
 import org.jetbrains.anko.*
-import ie.wit.helpers.readImage
-import ie.wit.helpers.readImageFromPath
-import ie.wit.helpers.showImagePicker
 
 
-class RecipeFragment : AppCompatActivity(), AnkoLogger {
+class RecipeActivity : AppCompatActivity(), AnkoLogger {
 
     var recipe = RecipesModel()
     lateinit var app: RecipesApp
     var edit = false
     val IMAGE_REQUEST = 1
-//    val intent = Intent()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_recipe)
+        setContentView(R.layout.activity_recipe)
         app = application as RecipesApp
-
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//
-//        val root = inflater.inflate(R.layout.fragment_recipe, container, false)
-//        activity?.title = getString(R.string.action_recipe)
 
 
         if (intent.hasExtra("recipe_edit"))
         {
             edit = true
             recipe = intent.extras?.getParcelable<RecipesModel>("recipe_edit")!!
-            recipeTitle.setText(recipe.recipeAddMethod)
+            recipeTitle.setText(recipe.title)
             recipeDescription.setText(recipe.description)
             btnAdd.setText(R.string.save_recipe)
             recipeImage.setImageBitmap(readImageFromPath(this, recipe.image))
@@ -68,9 +48,9 @@ class RecipeFragment : AppCompatActivity(), AnkoLogger {
         }
 
         btnAdd.setOnClickListener() {
-            recipe.recipeAddMethod = recipeTitle.text.toString()
+            recipe.title = recipeTitle.text.toString()
             recipe.description = recipeDescription.text.toString()
-            if (recipe.recipeAddMethod.isEmpty()) {
+            if (recipe.title.isEmpty()) {
                 toast(R.string.enter_recipe_title)
             } else {
                 if (edit) {
@@ -80,12 +60,14 @@ class RecipeFragment : AppCompatActivity(), AnkoLogger {
                 }
             }
             info("add Button Pressed: $recipeTitle")
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
 
         }
 
         //Add action bar and set title
-//        toolbarAdd.title = title
-//        setSupportActionBar(toolbarAdd)
+        toolbarAdd.title = title
+        setSupportActionBar(toolbarAdd)
 
 
 
@@ -101,7 +83,7 @@ class RecipeFragment : AppCompatActivity(), AnkoLogger {
 //    companion object {
 //        @JvmStatic
 //        fun newInstance() =
-//            RecipeFragment().apply {
+//            RecipeActivity().apply {
 //                arguments = Bundle().apply {}
 //            }
 //    }
@@ -109,7 +91,7 @@ class RecipeFragment : AppCompatActivity(), AnkoLogger {
 //    fun setButtonListener( layout: View) {
 //        layout.btnAdd.setOnClickListener {
 //
-//                app.recipes.create(RecipesModel(recipeAddMethod = recipeTransactionmethod,amount = amount))
+//                app.recipes.create(RecipesModel(title = recipeTransactionmethod,amount = amount))
 //            }
 //        }
 

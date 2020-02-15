@@ -3,17 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="ie.wit.activities.Recipe">
 
-    <item
-        android:id="@+id/action_report"
-        android:orderInCategory="100"
-        android:title="@string/action_report"
-        app:showAsAction="never" />
 
-    <item
-        android:id="@+id/action_recipe"
-        android:orderInCategory="100"
-        android:title="@string/action_recipe"
-        app:showAsAction="never" />
 
     <item
         android:id="@+id/btn_sign_out"
