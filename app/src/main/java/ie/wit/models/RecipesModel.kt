@@ -5,6 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class RecipesModel(var id: Long = 0,
-                         val recipeTransactionmethod: String = "N/A",
-                         val amount: Int = 0) : Parcelable
+                        var title: String = "",
+                        var recipeAddMethod: String = "N/A",
+                        var description: String = "",
+                        var image: String = "") : Parcelable {
+
+}
 

@@ -1,6 +1,7 @@
 package ie.wit.models
 
 import android.util.Log
+import org.jetbrains.anko.AnkoLogger
 
 var lastId = 0L
 
@@ -8,33 +9,43 @@ internal fun getId(): Long {
     return lastId++
 }
 
-class RecipesMemStore : RecipesStore {
+abstract class RecipesMemStore : RecipesStore, AnkoLogger {
 
-        val recipess = ArrayList<RecipesModel>()
+        val recipeList = ArrayList<RecipesModel>()
 
         override fun findAll(): List<RecipesModel> {
-            return recipess
+            return recipeList
         }
 
         override fun findById(id:Long) : RecipesModel? {
-            val foundRecipes: RecipesModel? = recipess.find { it.id == id }
+            val foundRecipes: RecipesModel? = recipeList.find { it.id == id }
             return foundRecipes
         }
 
-        override fun create(recipes: RecipesModel) {
-            recipes.id = getId()
-            recipess.add(recipes)
-            logAll()
-        }
 
-//        override fun update(recipes: RecipesModel) {
-//            recipes.id = getId()
-//            recipess.add(recipes)
+    override fun create(recipe: RecipesModel) {
+        recipe.id = getId()
+        recipeList.add(recipe)
+        logAll()
+    }
+//        override fun create(recipe: RecipesModel) {
+//            recipes.r = getId()
+//            recipes.add(recipe)
 //            logAll()
-//    }
+//        }
+
+      override fun update(movie: RecipesModel) {
+        var foundRecipe: RecipesModel? = recipeList.find { p -> p.id == movie.id }
+        if (foundRecipe != null) {
+            foundRecipe.title = movie.title
+            foundRecipe.description = movie.description
+            foundRecipe.image = movie.image
+            logAll();
+        }
+    }
 
         fun logAll() {
             Log.v("Recipe","** Recipess List **")
-            recipess.forEach { Log.v("Recipe","${it}") }
+            recipeList.forEach { Log.v("Recipe","${it}") }
         }
     }

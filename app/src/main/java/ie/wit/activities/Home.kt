@@ -1,5 +1,6 @@
 package ie.wit.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -7,7 +8,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
@@ -24,7 +24,7 @@ import org.jetbrains.anko.toast
 class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
-    lateinit var ft: FragmentTransaction
+//    lateinit var ft: FragmentTransaction
     val signOut = SignInActivity()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,18 +47,17 @@ class Home : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        ft = supportFragmentManager.beginTransaction()
+//        ft = supportFragmentManager.beginTransaction()
 
-        val fragment = RecipeFragment.newInstance()
-        ft.replace(R.id.homeFrame, fragment)
-        ft.commit()
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_recipe -> navigateTo(RecipeFragment.newInstance())
-            R.id.nav_report -> navigateTo(ReportFragment.newInstance())
+            R.id.nav_recipe -> startActivity(Intent(this, RecipeFragment::class.java))
+            R.id.nav_report -> startActivity(Intent(this, ReportFragment::class.java))
+
 
             else -> toast("You Selected Something Else")
         }
@@ -86,7 +85,7 @@ class Home : AppCompatActivity(),
                         Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
                     }
             })
-                //logout
+            //logout
 
         }
         return super.onOptionsItemSelected(item)
@@ -95,14 +94,14 @@ class Home : AppCompatActivity(),
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START)
-         else
+        else
             super.onBackPressed()
     }
 
-    private fun navigateTo(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.homeFrame, fragment)
-            .addToBackStack(null)
-            .commit()
-    }
+//    private fun navigateTo(activity: Intent) {
+//        supportFragmentManager.beginTransaction()
+//            .replace(R.id.homeFrame, activity)
+//            .addToBackStack(null)
+//            .commit()
+//    }
 }

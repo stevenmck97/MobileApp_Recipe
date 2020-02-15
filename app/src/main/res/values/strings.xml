@@ -13,7 +13,7 @@
     <string name="reportTitle">Recipes List</string>
     <string name="defaultAmount">00</string>
     <string name="defaultMethod">N/A</string>
-    <string name="enter_amount">Enter Amount</string>
+    <string name="enter_recipe">Enter Recipe Details</string>
 
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -45,15 +45,19 @@
     <string name="google_title_text">Google Sign In</string>
 
 
-    <string name="button_addMovieApp">Add Movie</string>
-    <string name="button_saveMovieApp">Save Movie</string>
+    <string name="button_addRecipeApp">Add Recipe</string>
+    <string name="button_saveRecipe">Save Recipe</string>
     <string name="button_addImage"> Add Image </string>
-    <string name="hint_movieappTitle">Movie Title</string>
-    <string name="hint_movieappDescription">Movie Description</string>
-    <string name="menu_addMovieApp">Add</string>
-    <string name="menu_cancelMovieApp">Cancel</string>
+    <string name="hint_recipeappTitle">Recipe Title</string>
+    <string name="hint_recipeappDescription">Recipe Description</string>
     <string name="message_enter_title">Please enter a title</string>
-    <string name="select_movieapp_image">Select Movie image</string>
+    <string name="select_recipe_image">Select Recipe image</string>
+    <string name="menu_addRecipe">Add</string>
+    <string name="menu_cancelRecipe">Cancel</string>
+    <string name="enter_recipe_title">Please enter a Recipe Title</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="change_recipe_image">Change Recipe image</string>
+    <string name="menu_deleteRecipe">Delete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -5,11 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ie.wit.R
+import ie.wit.helpers.readImageFromPath
 import ie.wit.models.RecipesModel
 import kotlinx.android.synthetic.main.card_recipes.view.*
 
-class RecipesAdapter constructor(private var recipess: List<RecipesModel>)
-    : RecyclerView.Adapter<RecipesAdapter.MainHolder>() {
+interface RecipeListener {
+    fun onRecipeClick(recipe: RecipesModel)
+}
+
+class RecipesAdapter constructor(private var recipes: List<RecipesModel>,
+                                 private val listener: RecipeListener) : RecyclerView.Adapter<RecipesAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
@@ -22,18 +27,24 @@ class RecipesAdapter constructor(private var recipess: List<RecipesModel>)
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val recipes = recipess[holder.adapterPosition]
-        holder.bind(recipes)
+        val recipe = recipes[holder.adapterPosition]
+        holder.bind(recipe, listener)
     }
 
-    override fun getItemCount(): Int = recipess.size
+    override fun getItemCount(): Int = recipes.size
 
     class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(recipes: RecipesModel) {
-            itemView.recipeTransactionamount.text = recipes.amount.toString()
-            itemView.recipeTransactionmethod.text = recipes.recipeTransactionmethod
-            itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_round)
+            fun bind(recipe: RecipesModel, listener: RecipeListener) {
+                itemView.recipeTitleList.text = recipe.title
+                itemView.recipeDescriptionList.text = recipe.description
+                itemView.imageViewList.setImageBitmap(
+                    readImageFromPath(
+                        itemView.context,
+                        recipe.image
+                    )
+                )
+                itemView.setOnClickListener { listener.onRecipeClick(recipe) }
+            }
         }
     }
-}
