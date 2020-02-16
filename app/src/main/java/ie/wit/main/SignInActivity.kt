@@ -12,14 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import ie.wit.activities.Home
-import com.google.android.gms.tasks.Task
-import androidx.annotation.NonNull
-import com.google.android.gms.tasks.OnCompleteListener
-import android.R
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import android.view.View
 
 
 class SignInActivity : AppCompatActivity() {
@@ -32,7 +24,7 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(ie.wit.R.layout.activity_main)
 
-        btn_sign_out.setOnClickListener({
+        btn_sign_out.setOnClickListener {
             //logout
             AuthUI.getInstance().signOut(this@SignInActivity)
                 .addOnCompleteListener {
@@ -41,7 +33,7 @@ class SignInActivity : AppCompatActivity() {
                 }.addOnFailureListener {
                     Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
                 }
-        })
+        }
 
 
         //Init Provider
@@ -80,17 +72,6 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-//    fun onClick(v: View) {
-//        if (v.getId() === btn_sign_out) {
-//            AuthUI.getInstance()
-//                .signOut(this)
-//                .addOnCompleteListener {
-//                    // user is now signed out
-//                    startActivity(Intent(this@MyActivity, SignInActivity::class.java))
-//                    finish()
-//                }
-//        }
-//    }
 
 
 

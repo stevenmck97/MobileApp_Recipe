@@ -18,10 +18,6 @@ fun generateRandomId(): Long {
 
 class RecipeJSONStore : RecipesStore, AnkoLogger {
 
-
-
-
-
     val context: Context
     var recipes = mutableListOf<RecipesModel>()
 

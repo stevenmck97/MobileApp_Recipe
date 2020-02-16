@@ -65,34 +65,4 @@ class RecipeListActivity : AppCompatActivity(), RecipeListener {
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
-
-
-
-
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        app = activity?.application as RecipesApp
-//    }
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        // Inflate the layout for this fragment
-//        var root = inflater.inflate(R.layout.activity_recipe_list, container, false)
-//
-//        root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-//        root.recyclerView.adapter = RecipesAdapter(app.recipes.findAll())
-//
-//        return root
-//    }
-//
-//    companion object {
-//        @JvmStatic
-//        fun newInstance() =
-//            RecipeListActivity().apply {
-//                arguments = Bundle().apply { }
-//            }
-//    }
 }

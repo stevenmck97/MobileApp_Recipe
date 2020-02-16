@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorHome"
     tools:context=".activities.RecipeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -30,6 +31,7 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <TextView
         android:id="@+id/welcomeTitle"
         android:layout_width="188dp"
@@ -43,12 +45,13 @@
         android:layout_marginBottom="8dp"
         android:text="@string/welcomeTitle"
         android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/homeTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
+        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintVertical_bias="0.108" />
 
     <TextView
         android:id="@+id/recipeSubtitle"
@@ -63,14 +66,13 @@
         android:layout_marginBottom="8dp"
         android:text="@string/recipeSubtitle"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/homeTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
-
-
+        app:layout_constraintVertical_bias="0.531" />
 
     <EditText
         android:id="@+id/recipeTitle"
@@ -82,6 +84,8 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="@string/enter_recipe_title"
+        android:textColor="@color/homeTextWhite"
+        android:textColorHint="@color/textHintColor"
         android:inputType="text"
         android:maxLength="25"
         android:maxLines="1"
@@ -103,6 +107,8 @@
         android:autofillHints="Please Enter Recipe Details"
         android:ems="10"
         android:hint="@string/enter_recipe"
+        android:textColor="@color/homeTextWhite"
+        android:textColorHint="@color/textHintColor"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -113,51 +119,48 @@
 
     <Button
         android:id="@+id/btnAdd"
-        android:layout_width="138dp"
-        android:layout_height="40dp"
+        android:layout_width="143dp"
+        android:layout_height="46dp"
         android:layout_margin="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:stateListAnimator="@null"
         android:text="@string/button_addRecipe"
-        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.029"
+        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.935" />
+        app:layout_constraintVertical_bias="0.94" />
 
     <Button
         android:id="@+id/chooseImage"
-        android:layout_width="135dp"
-        android:layout_height="40dp"
+        android:layout_width="143dp"
+        android:layout_height="46dp"
         android:layout_margin="16dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:text="@string/button_addImage"
-        android:textColor="@color/colorPrimary"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.862"
+        app:layout_constraintHorizontal_bias="0.966"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.94" />
 
     <ImageView
         android:id="@+id/recipeImage"
-        android:layout_width="385dp"
-        android:layout_height="308dp"
+        android:layout_width="224dp"
+        android:layout_height="221dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.239"
-        app:srcCompat="@mipmap/ic_launcher" />
+        app:layout_constraintVertical_bias="0.266"
+        app:srcCompat="@drawable/foodicon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

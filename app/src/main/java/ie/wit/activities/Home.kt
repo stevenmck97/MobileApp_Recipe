@@ -10,7 +10,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
 import ie.wit.R
 import ie.wit.main.SignInActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,11 +26,6 @@ class Home : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action",
-                Snackbar.LENGTH_LONG).setAction("Action", null).show()
-        }
 
         navView.setNavigationItemSelectedListener(this)
 
@@ -67,7 +61,7 @@ class Home : AppCompatActivity(),
 
         when (item.itemId) {
 
-            R.id.btn_sign_out -> btn_sign_out.setOnClickListener({
+            R.id.btn_sign_out -> btn_sign_out.setOnClickListener {
                 //logout
                 AuthUI.getInstance().signOut(signOut)
                     .addOnCompleteListener {
@@ -76,7 +70,7 @@ class Home : AppCompatActivity(),
                     }.addOnFailureListener {
                         Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
                     }
-            })
+            }
             //logout
 
         }

@@ -12,7 +12,7 @@
     <string name="change_recipe_image">Change Recipe image</string>
     <string name="menu_deleteRecipe">Delete</string>
     <string name="recipeSubtitle">Add your recipes here!</string>
-    <string name="welcomeTitle">Welcome</string>
+    <string name="welcomeTitle">Welcome!</string>
     <string name="aboutUs">This is Steven McKeown\'s Recipe app! Please add recipes to your content!</string>
 
     <string name="reportTitle">Recipes List</string>
@@ -22,12 +22,12 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Test User</string>
-    <string name="nav_header_subtitle">useremail@android.com</string>
+    <string name="nav_header_subtitle">test@testemail.ie</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_recipe">Recipes</string>
-    <string name="menu_report">List</string>
+    <string name="menu_recipe">Add a recipe</string>
+    <string name="menu_report">Your recipes</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_about">About Us</string>
     <string name="menu_share">Share</string>

@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="16dp"
+        android:background="@color/colorHome">
 
         <ImageView
             android:id="@+id/imageViewList"
@@ -26,7 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/imageViewList"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:textColor="@color/homeTextWhite"/>
 
         <TextView
             android:id="@+id/recipeDescriptionList"
@@ -34,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/recipeTitleList"
             android:layout_toRightOf="@+id/imageViewList"
+            android:textColor="@color/homeTextWhite"
             />
 
     </RelativeLayout>
