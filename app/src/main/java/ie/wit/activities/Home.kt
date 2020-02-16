@@ -11,7 +11,6 @@ import androidx.core.view.GravityCompat
 import com.firebase.ui.auth.AuthUI
 import com.google.android.material.navigation.NavigationView
 import ie.wit.R
-import ie.wit.main.SignInActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*

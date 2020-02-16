@@ -7,7 +7,7 @@ Availability: https://www.youtube.com/watch?v=7SZO3bT1M0I&t=418s
  */
 
 
-package ie.wit.main
+package ie.wit.activities
 
 import android.app.Activity
 import android.content.Intent
@@ -20,7 +20,6 @@ import com.firebase.ui.auth.IdpResponse
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
-import ie.wit.activities.Home
 
 
 class SignInActivity : AppCompatActivity() {
