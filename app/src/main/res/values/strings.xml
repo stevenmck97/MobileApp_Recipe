@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipe List App</string>
+    <string name="app_name">Recipe App</string>
     <string name="button_addRecipe">Add Recipe</string>
     <string name="hint_recipeTitle">Recipe Title</string>
     <string name="hint_recipeDescription">Description</string>
