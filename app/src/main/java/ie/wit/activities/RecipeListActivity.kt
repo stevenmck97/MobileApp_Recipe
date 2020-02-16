@@ -56,10 +56,12 @@ class RecipeListActivity : AppCompatActivity(), RecipeListener {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+//loads recipes
     private fun loadRecipes() {
         showRecipes(app.recipes.findAll())
     }
 
+//displays recipes from recyclerview widget
     fun showRecipes (recipes: List<RecipesModel>) {
         recyclerView.adapter = RecipesAdapter(recipes, this)
         recyclerView.adapter?.notifyDataSetChanged()

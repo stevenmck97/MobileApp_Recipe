@@ -17,11 +17,15 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import kotlinx.android.synthetic.main.home.*
 import org.jetbrains.anko.toast
 
+
+//creates class to make use of AppCompatActivity to allow for the use of Activities.
+// also implements class Navigation view to allow for use of Nav drawer
 class Home : AppCompatActivity(),
     NavigationView.OnNavigationItemSelectedListener {
 
     val signOut = SignInActivity()
 
+//adds toobar to the action bar
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
@@ -29,6 +33,7 @@ class Home : AppCompatActivity(),
 
         navView.setNavigationItemSelectedListener(this)
 
+//creates toggle variable to easily use ActionBarDrawerToggle class
         val toggle = ActionBarDrawerToggle(
             this, drawerLayout, toolbar,
             R.string.navigation_drawer_open,
@@ -39,6 +44,7 @@ class Home : AppCompatActivity(),
 
     }
 
+//assigns navigations items to an activity so when they are pressed they open a new activity
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -48,6 +54,8 @@ class Home : AppCompatActivity(),
 
             else -> toast("You Selected Something Else")
         }
+
+    //closes the nav drawer if pressed again
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
@@ -57,6 +65,9 @@ class Home : AppCompatActivity(),
         return true
     }
 
+
+//allows user to sign out.
+//made with help from: https://www.youtube.com/watch?v=7SZO3bT1M0I&t=418s
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -71,7 +82,7 @@ class Home : AppCompatActivity(),
                         Toast.makeText(this, "" + it.message, Toast.LENGTH_SHORT).show()
                     }
             }
-            //logout
+
 
         }
         return super.onOptionsItemSelected(item)

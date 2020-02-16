@@ -1,3 +1,12 @@
+/*Most of the code in this class was made by following this youtube tutorial: https://www.youtube.com/watch?v=7SZO3bT1M0I&t=418s
+Title: Android Tutorial Kotlin Firebase Authentication
+Author: Shakhawat Hossen
+Date: <date>
+Code version: <code version>
+Availability: https://www.youtube.com/watch?v=7SZO3bT1M0I&t=418s
+ */
+
+
 package ie.wit.main
 
 import android.app.Activity
@@ -52,6 +61,8 @@ class SignInActivity : AppCompatActivity() {
             .setTheme(ie.wit.R.style.MyTheme).build(), MY_REQUEST_CODE)
     }
 
+
+//I modified this function by checking if there was a user signed in and if there was I redirected you to the home activity
      override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == MY_REQUEST_CODE){

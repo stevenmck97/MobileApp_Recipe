@@ -42,6 +42,7 @@ class RecipeActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
+        //validates whether a title has been entered or not. Will not allow you to add if no title is present
         btnAdd.setOnClickListener() {
             recipe.title = recipeTitle.text.toString()
             recipe.description = recipeDescription.text.toString()
@@ -77,7 +78,7 @@ class RecipeActivity : AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-
+//deletes recipe card when pressed or allows you to cancel
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.item_delete -> {
@@ -91,6 +92,7 @@ class RecipeActivity : AppCompatActivity(), AnkoLogger {
         return super.onOptionsItemSelected(item)
     }
 
+//allows you to choose an image from your device and replace it with the placeholder image in the add activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
