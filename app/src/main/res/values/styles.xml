@@ -8,7 +8,7 @@
     </style>
 
     <style name="MyTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/colorPrimaryDark</item>
+        <item name="android:windowBackground">@drawable/food_background_3</item>
     </style>
 
     <!-- Activity with no Title -->
