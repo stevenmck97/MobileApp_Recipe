@@ -28,10 +28,6 @@
 
     <string name="menu_recipe">Add a recipe</string>
     <string name="menu_report">Your recipes</string>
-    <string name="menu_favourites">Favourites</string>
-    <string name="menu_about">About Us</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
@@ -46,10 +42,5 @@
     <string name="disconnect">Disconnect</string>
     <string name="google_status_fmt">Google User: %s</string>
     <string name="google_title_text">Google Sign In</string>
-
-
-
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    
 </resources>
