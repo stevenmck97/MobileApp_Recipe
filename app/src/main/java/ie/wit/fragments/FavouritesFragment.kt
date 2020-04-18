@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ie.wit.R
 import ie.wit.main.RecipesApp
-import ie.wit.utils.getAllRecipess
-import ie.wit.utils.getFavouriteRecipess
+import ie.wit.utils.getAllRecipes
+import ie.wit.utils.getFavouriteRecipes
 import ie.wit.utils.setMapMarker
 import kotlinx.android.synthetic.main.fragment_favourites.*
 
@@ -44,12 +44,12 @@ class FavouritesFragment : Fragment() {
                 if (!viewFavourites) {
                     imageMapFavourites.setImageResource(R.drawable.ic_favorite_on)
                     viewFavourites = true
-                    getFavouriteRecipess(app)
+                    getFavouriteRecipes(app)
                 }
                 else {
                     imageMapFavourites.setImageResource(R.drawable.ic_favorite_off)
                     viewFavourites = false
-                    getAllRecipess(app)
+                    getAllRecipes(app)
                 }
             }
         })

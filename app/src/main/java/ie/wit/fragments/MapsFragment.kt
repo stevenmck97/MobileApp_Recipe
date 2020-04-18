@@ -24,6 +24,6 @@ class MapsFragment : SupportMapFragment(), OnMapReadyCallback{
         app.mMap.clear()
         trackLocation(app)
         setMapMarker(app)
-        getAllRecipess(app)
+        getAllRecipes(app)
     }
 }

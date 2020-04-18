@@ -5,6 +5,14 @@
     <color name="colorAccent">#034F8F</color>
     <color name="ic_launcher_homer_background">#FFFFFF</color>
 
+    <color name="colorHome">#1B2F42</color>
+    <color name="colorSignIn">#316192</color>
+
+
+    <color name="homeTextWhite">#FFFFFF</color>
+    <color name="textHintColor">#919191</color>
+
+
     <color name="colorWhite">#FFFFFF</color>
     <color name="grey_100">#2196F3</color>
     <color name="grey_300">#E0E0E0</color>

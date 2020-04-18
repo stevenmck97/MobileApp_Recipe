@@ -23,7 +23,7 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
-            LayoutInflater.from(parent?.context).inflate(
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.card_recipes,
                 parent,
                 false
@@ -47,8 +47,10 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
 
         fun bind(recipes: RecipesModel, listener: RecipesListener, reportAll: Boolean) {
             itemView.tag = recipes
-            itemView.paymentamount.text = recipes.amount.toString()
-            itemView.paymentmethod.text = recipes.paymenttype
+//            itemView.paymentamount.text = recipes.amount.toString()
+//            itemView.paymentmethod.text = recipes.paymenttype
+            itemView.recipeTitleList.text = recipes.title
+            itemView.recipeDescriptionList.text = recipes.description
             if(recipes.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
 
             if(!reportAll)

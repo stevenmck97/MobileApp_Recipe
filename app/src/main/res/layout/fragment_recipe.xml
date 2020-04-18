@@ -5,217 +5,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorHome"
     tools:context=".fragments.RecipeFragment">
 
-    <ImageView
-        android:id="@+id/imagefavourite"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
-        app:layout_constraintStart_toEndOf="@+id/recipeTitle"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/star_big_off" />
-
-    <TextView
-        android:id="@+id/recipeTitle"
-        android:layout_width="188dp"
-        android:layout_height="30dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/recipeTitle"
-        android:textAppearance="?android:attr/textAppearanceLarge"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:fitsSystemWindows="true"
+        app:elevation="0dip"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.017" />
+        app:layout_constraintVertical_bias="0.0"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarAdd"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <TextView
+        android:id="@+id/welcomeTitle"
+        android:layout_width="188dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/welcomeTitle"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/homeTextWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
 
     <TextView
         android:id="@+id/recipeSubtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/recipeTitle"
         android:layout_alignEnd="@+id/recipeTitle"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/recipeTitle"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/recipeSubtitle"
         android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/homeTextWhite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintHorizontal_bias="0.458"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.114" />
-
-    <Button
-        android:id="@+id/recipeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/recipeButton"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.028"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.948" />
-
-    <RadioGroup
-        android:id="@+id/paymentMethod"
-        android:layout_width="181dp"
-        android:layout_height="128dp"
-        android:layout_above="@+id/progressBar"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/recipeSubtitle"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_toStartOf="@+id/amountPicker"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.042"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/recipeTitle"
-        app:layout_constraintVertical_bias="0.276">
-
-        <RadioButton
-            android:id="@+id/PayPal"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="@string/paypal" />
-
-        <RadioButton
-            android:id="@+id/Direct"
-            android:layout_width="97dp"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="@string/direct" />
-    </RadioGroup>
-
-    <NumberPicker
-        android:id="@+id/amountPicker"
-        style="@android:style/Widget.Material.NumberPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/recipeSubtitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.973"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="349dp"
-        android:layout_height="14dp"
-        android:layout_above="@+id/recipeButton"
-        android:layout_alignEnd="@+id/recipeSubtitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:indeterminate="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.7" />
-
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/amount"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.778" />
-
-    <TextView
-        android:id="@+id/total"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/total"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.902" />
-
-    <TextView
-        android:id="@+id/totalSoFar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/totalSoFar"
-        android:textAppearance="@android:style/TextAppearance.Material.Medium"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.902" />
+        app:layout_constraintVertical_bias="0.531" />
 
     <EditText
-        android:id="@+id/paymentAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
+        android:id="@+id/recipeTitle"
+        android:layout_width="393dp"
+        android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:inputType="number"
+        android:hint="@string/enter_recipe_title"
+        android:inputType="text"
+        android:maxLength="25"
+        android:maxLines="1"
+        android:textColor="@color/homeTextWhite"
+        android:textColorHint="@color/textHintColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.643" />
+
+    <EditText
+        android:id="@+id/recipeDescription"
+        android:layout_width="393dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:autofillHints="Please Enter Recipe Details"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/enter_recipe"
+        android:inputType="textMultiLine"
+        android:textColor="@color/homeTextWhite"
+        android:textColorHint="@color/textHintColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.888"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.781"
-        android:autofillHints="Please Enter an Amount"
-        android:hint="@string/enter_amount"/>
+        app:layout_constraintVertical_bias="0.781" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="143dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:background="@color/colorPrimary"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:stateListAnimator="@null"
+        android:text="@string/button_addRecipe"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.94" />
+
+<!--    <Button-->
+<!--        android:id="@+id/chooseImage"-->
+<!--        android:layout_width="143dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:background="@color/colorPrimary"-->
+<!--        android:paddingTop="8dp"-->
+<!--        android:paddingBottom="8dp"-->
+<!--        android:text="@string/button_addImage"-->
+<!--        android:textSize="16sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.966"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.94" />-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/recipeImage"-->
+<!--        android:layout_width="224dp"-->
+<!--        android:layout_height="221dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.266"-->
+<!--        app:srcCompat="@drawable/foodicon" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

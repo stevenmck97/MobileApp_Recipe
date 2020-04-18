@@ -83,7 +83,7 @@ open class ReportFragment : Fragment(), AnkoLogger,
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllRecipess(app.auth.currentUser!!.uid)
+                getAllRecipes(app.auth.currentUser!!.uid)
             }
         })
     }
@@ -129,13 +129,13 @@ open class ReportFragment : Fragment(), AnkoLogger,
     override fun onResume() {
         super.onResume()
         if(this::class == ReportFragment::class)
-            getAllRecipess(app.auth.currentUser!!.uid)
+            getAllRecipes(app.auth.currentUser!!.uid)
     }
 
-    fun getAllRecipess(userId: String?) {
+    fun getAllRecipes(userId: String?) {
         loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Recipess from Firebase")
-        val recipessList = ArrayList<RecipesModel>()
+        showLoader(loader, "Downloading Recipes from Firebase")
+        val recipesList = ArrayList<RecipesModel>()
         app.database.child("user-recipes").child(userId!!)
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -149,9 +149,9 @@ open class ReportFragment : Fragment(), AnkoLogger,
                         val recipes = it.
                             getValue<RecipesModel>(RecipesModel::class.java)
 
-                        recipessList.add(recipes!!)
+                        recipesList.add(recipes!!)
                         root.recyclerView.adapter =
-                            RecipesAdapter(recipessList, this@ReportFragment,false)
+                            RecipesAdapter(recipesList, this@ReportFragment,false)
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 

@@ -83,7 +83,7 @@ fun uploadImageView(app: RecipesApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                updateAllRecipess(app)
+                updateAllRecipes(app)
                 writeImageRef(app,app.userImage.toString())
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
@@ -114,7 +114,7 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     return uri
 }
 
-fun updateAllRecipess(app: RecipesApp) {
+fun updateAllRecipes(app: RecipesApp) {
     val userId = app.auth.currentUser!!.uid
     val userEmail = app.auth.currentUser!!.email
     val recipesRef = app.database.ref.child("recipes")

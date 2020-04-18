@@ -10,7 +10,7 @@
     <string name="amount">Amount</string>
     <string name="total">Total so Far</string>
     <string name="totalSoFar">$ Total</string>
-    <string name="reportTitle">Recipess Report</string>
+    <string name="reportTitle">Recipes Report</string>
     <string name="defaultAmount">00</string>
     <string name="defaultMethod">N/A</string>
     <string name="enter_amount">Enter Amount</string>
@@ -62,12 +62,44 @@
     <string name="emailpassword_status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="emailpassword_title_text">Please Login Below</string>
 
-    <string name="menu_report_all">All Recipess</string>
+    <string name="menu_report_all">All Recipes</string>
     <string name="select_profile_image">Select Profile Image</string>
-    <string name="favourites_title">Favourite Recipess</string>
+    <string name="favourites_title">Favourite Recipes</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="button_addRecipe">Add Recipe</string>
+    <string name="hint_recipeTitle">Recipe Title</string>
+    <string name="hint_recipeDescription">Description</string>
+    <string name="menu_addRecipe">Add</string>
+    <string name="menu_cancelRecipe">Cancel</string>
+    <string name="enter_recipe_title">Please enter a Recipe Title</string>
+    <string name="save_recipe">Save Recipe</string>
+    <string name="button_addImage">Add Image</string>
+    <string name="select_recipe_image">Select Recipe image</string>
+    <string name="change_recipe_image">Change Recipe image</string>
+    <string name="menu_deleteRecipe">Delete</string>
+
+    <string name="welcomeTitle">Welcome!</string>
+    <string name="aboutUs">This is Steven McKeown\'s Recipe app! Please add recipes to your content!</string>
+
+
+    <string name="enter_recipe">Enter Recipe Details</string>
+
+
+
+
+    <string name="label_google_sign_in">Firebase + Google Sign In</string>
+    <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
+
+
+
+    <string name="id_fmt">User ID: %s</string>
+
+    <string name="google_status_fmt">Google User: %s</string>
+    <string name="google_title_text">Google Sign In</string>
 
     <!--END Firebase Resources-->
 </resources>

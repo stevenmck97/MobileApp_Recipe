@@ -48,20 +48,20 @@ class ReportAllFragment : ReportFragment(),
         root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
             override fun onRefresh() {
                 root.swiperefresh.isRefreshing = true
-                getAllUsersRecipess()
+                getAllUsersRecipes()
             }
         })
     }
 
     override fun onResume() {
         super.onResume()
-        getAllUsersRecipess()
+        getAllUsersRecipes()
     }
 
-    fun getAllUsersRecipess() {
+    fun getAllUsersRecipes() {
         loader = createLoader(activity!!)
-        showLoader(loader, "Downloading All Users Recipess from Firebase")
-        val recipessList = ArrayList<RecipesModel>()
+        showLoader(loader, "Downloading All Users Recipes from Firebase")
+        val recipesList = ArrayList<RecipesModel>()
         app.database.child("recipes")
             .addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
@@ -75,9 +75,9 @@ class ReportAllFragment : ReportFragment(),
                         val recipes = it.
                             getValue<RecipesModel>(RecipesModel::class.java)
 
-                        recipessList.add(recipes!!)
+                        recipesList.add(recipes!!)
                         root.recyclerView.adapter =
-                            RecipesAdapter(recipessList, this@ReportAllFragment,true)
+                            RecipesAdapter(recipesList, this@ReportAllFragment,true)
                         root.recyclerView.adapter?.notifyDataSetChanged()
                         checkSwipeRefresh()
 

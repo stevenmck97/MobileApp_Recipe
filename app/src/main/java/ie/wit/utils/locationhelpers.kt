@@ -96,8 +96,8 @@ fun setMapMarker(app: RecipesApp) {
     app.mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 14f))
 }
 
-fun getAllRecipess(app: RecipesApp) {
-    val recipessList = ArrayList<RecipesModel>()
+fun getAllRecipes(app: RecipesApp) {
+    val recipesList = ArrayList<RecipesModel>()
 
     app.database.child("user-recipes").child(app.auth.currentUser!!.uid)
         .addValueEventListener(object : ValueEventListener {
@@ -109,16 +109,16 @@ fun getAllRecipess(app: RecipesApp) {
                 children.forEach {
                     val recipes = it.
                         getValue<RecipesModel>(RecipesModel::class.java)
-                    recipessList.add(recipes!!)
+                    recipesList.add(recipes!!)
                 }
-                addMapMarkers(recipessList, app.mMap)
+                addMapMarkers(recipesList, app.mMap)
             }
         })
 
 }
 
-fun getFavouriteRecipess(app: RecipesApp) {
-    val recipessList = ArrayList<RecipesModel>()
+fun getFavouriteRecipes(app: RecipesApp) {
+    val recipesList = ArrayList<RecipesModel>()
 
     app.database.child("user-recipes").child(app.auth.currentUser!!.uid)
         .orderByChild("isfavourite")
@@ -132,9 +132,9 @@ fun getFavouriteRecipess(app: RecipesApp) {
                 children.forEach {
                     val recipes = it.
                         getValue<RecipesModel>(RecipesModel::class.java)
-                    recipessList.add(recipes!!)
+                    recipesList.add(recipes!!)
                 }
-                addMapMarkers(recipessList, app.mMap)
+                addMapMarkers(recipesList, app.mMap)
             }
         })
 
@@ -144,8 +144,8 @@ fun addMapMarkers(dl : ArrayList<RecipesModel>, map: GoogleMap) {
     dl.forEach {
         map.addMarker(
             MarkerOptions().position(LatLng(it.latitude, it.longitude))
-                .title("${it.paymenttype} €${it.amount}")
-                .snippet(it.message)
+                .title("${it.title} €${it.description}")
+//                .snippet(it.message)
                 .icon(
                     BitmapDescriptorFactory.fromResource(R.mipmap.ic_homer_map))
         )

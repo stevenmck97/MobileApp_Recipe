@@ -46,10 +46,10 @@ class EditFragment : Fragment(), AnkoLogger {
         activity?.title = getString(R.string.action_edit)
         loader = createLoader(activity!!)
 
-        root.editAmount.setText(editRecipes!!.amount.toString())
-        root.editPaymenttype.setText(editRecipes!!.paymenttype)
-        root.editMessage.setText(editRecipes!!.message)
-        root.editUpvotes.setText(editRecipes!!.upvotes.toString())
+
+        root.recipeTitle.setText(editRecipes!!.title)
+        root.recipeDescription.setText(editRecipes!!.description)
+
 
         root.editUpdateButton.setOnClickListener {
             showLoader(loader, "Updating Recipes on Server...")
@@ -73,9 +73,10 @@ class EditFragment : Fragment(), AnkoLogger {
     }
 
     fun updateRecipesData() {
-        editRecipes!!.amount = root.editAmount.text.toString().toInt()
-        editRecipes!!.message = root.editMessage.text.toString()
-        editRecipes!!.upvotes = root.editUpvotes.text.toString().toInt()
+
+        editRecipes!!.title = root.recipeTitle.text.toString()
+        editRecipes!!.description = root.recipeDescription.text.toString()
+
     }
 
     fun updateUserRecipes(userId: String, uid: String?, recipes: RecipesModel) {
