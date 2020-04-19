@@ -5,15 +5,15 @@
     <string name="recipeTitle">Welcome Homer</string>
     <string name="recipeSubtitle">Please Give Generously</string>
     <string name="recipeButton">Recipe</string>
-    <string name="paypal">PayPal</string>
-    <string name="direct">Direct</string>
-    <string name="amount">Amount</string>
-    <string name="total">Total so Far</string>
-    <string name="totalSoFar">$ Total</string>
+<!--    <string name="paypal">PayPal</string>-->
+<!--    <string name="direct">Direct</string>-->
+<!--    <string name="amount">Amount</string>-->
+<!--    <string name="total">Total so Far</string>-->
+<!--    <string name="totalSoFar">$ Total</string>-->
     <string name="reportTitle">Recipes Report</string>
-    <string name="defaultAmount">00</string>
-    <string name="defaultMethod">N/A</string>
-    <string name="enter_amount">Enter Amount</string>
+<!--    <string name="defaultAmount">00</string>-->
+<!--    <string name="defaultMethod">N/A</string>-->
+<!--    <string name="enter_amount">Enter Amount</string>-->
 
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -37,7 +37,7 @@
 
     <string name="action_edit">Edit Recipes</string>
     <string name="action_update">Update</string>
-    <string name="message_edit">Please Update your Details Below</string>
+    <string name="message_edit">Make Changes To Your Recipes Below!</string>
 
     <!-- START Firebase Resources-->
 

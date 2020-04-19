@@ -49,8 +49,8 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
             itemView.tag = recipes
 //            itemView.paymentamount.text = recipes.amount.toString()
 //            itemView.paymentmethod.text = recipes.paymenttype
-            itemView.recipeTitleList.text = recipes.title
-            itemView.recipeDescriptionList.text = recipes.description
+            itemView.recipeTitle.text = recipes.title
+            itemView.recipeDescription.text = recipes.description
             if(recipes.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
 
             if(!reportAll)

@@ -15,7 +15,6 @@ import ie.wit.R
 import ie.wit.main.RecipesApp
 import ie.wit.models.RecipesModel
 import ie.wit.utils.*
-import kotlinx.android.synthetic.main.card_recipes.view.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
 import kotlinx.android.synthetic.main.fragment_recipe.view.*
 import org.jetbrains.anko.AnkoLogger
@@ -57,7 +56,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
 //            root.paymentAmount.setText("$newVal")
 
         setButtonListener(root)
-//        setFavouriteListener(root)
+        setFavouriteListener(root)
         return root;
     }
 
@@ -91,20 +90,20 @@ class RecipeFragment : Fragment(), AnkoLogger {
         }
 
 
-//    fun setFavouriteListener (layout: View) {
-//        layout.imagefavourite.setOnClickListener(object : View.OnClickListener {
-//            override fun onClick(view: View?) {
-//                if (!favourite) {
-//                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_on)
-//                    favourite = true
-//                }
-//                else {
-//                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_off)
-//                    favourite = false
-//                }
-//            }
-//        })
-//    }
+    fun setFavouriteListener (layout: View) {
+        layout.imagefavourite.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                if (!favourite) {
+                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_on)
+                    favourite = true
+                }
+                else {
+                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_off)
+                    favourite = false
+                }
+            }
+        })
+    }
 
     override fun onResume() {
         super.onResume()
