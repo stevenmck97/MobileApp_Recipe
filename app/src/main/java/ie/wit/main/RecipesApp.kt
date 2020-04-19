@@ -20,6 +20,7 @@ class RecipesApp : Application(), AnkoLogger {
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var storage: StorageReference
     lateinit var userImage: Uri
+    lateinit var recipeImage: Uri
     lateinit var currentLocation : Location
     lateinit var locationClient : FusedLocationProviderClient
     lateinit var mMap : GoogleMap

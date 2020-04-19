@@ -1,22 +1,33 @@
 package ie.wit.fragments
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 
 import ie.wit.R
 import ie.wit.main.RecipesApp
 import ie.wit.models.RecipesModel
 import ie.wit.utils.*
+import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
 import kotlinx.android.synthetic.main.fragment_recipe.view.*
+import kotlinx.android.synthetic.main.fragment_recipe.view.imageView
+import kotlinx.android.synthetic.main.home.*
+import kotlinx.android.synthetic.main.nav_header_home.view.*
+//import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 //import org.jetbrains.anko.toast
@@ -28,7 +39,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     lateinit var app: RecipesApp
     var recipe = RecipesModel()
-//    var totalReciped = 0
+    var ImageView = imageView
     lateinit var loader : AlertDialog
     lateinit var eventListener : ValueEventListener
     var favourite = false
@@ -36,28 +47,31 @@ class RecipeFragment : Fragment(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = activity?.application as RecipesApp
+
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
+
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_recipe, container, false)
         loader = createLoader(activity!!)
         activity?.title = getString(R.string.action_recipe)
-
-//        root.progressBar.max = 10000
-//        root.amountPicker.minValue = 1
-//        root.amountPicker.maxValue = 1000
 //
-//        root.amountPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-//            //Display the newly selected number to paymentAmount
-//            root.paymentAmount.setText("$newVal")
+//        val image_view1 = ImageView
+//        val image_view = image_view1.findViewById<RecyclerView>(R.id.imageView)
+
+
 
         setButtonListener(root)
         setFavouriteListener(root)
+        setImageListener(root)
         return root;
+
+
     }
 
     companion object {
@@ -68,6 +82,8 @@ class RecipeFragment : Fragment(), AnkoLogger {
             }
     }
 
+
+
     fun setButtonListener( layout: View) {
         layout.btnAdd.setOnClickListener {
 //            val amount = if (
@@ -77,6 +93,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
             title = recipeTitle.text.toString(),
             description = recipeDescription.text.toString(),
             profilepic = app.userImage.toString(),
+            recipeImage = app.recipeImage.toString(),
             isfavourite = favourite,
             latitude = app.currentLocation.latitude,
             longitude = app.currentLocation.longitude,
@@ -103,6 +120,30 @@ class RecipeFragment : Fragment(), AnkoLogger {
                 }
             }
         })
+    }
+
+    fun setImageListener (layout: View) {
+        layout.imageView.setOnClickListener { showImagePicker2(this,1) }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            1 -> {
+                if (data != null) {
+                    writeImageRef(app,readImageUri(resultCode, data).toString())
+                    Picasso.get().load(readImageUri(resultCode, data).toString())
+                        .into(imageView, object : Callback {
+                            override fun onSuccess() {
+                                // Drawable is ready
+                                uploadImageView(app,imageView)
+                            }
+                            override fun onError(e: Exception) {}
+                        })
+                }
+            }
+        }
     }
 
     override fun onResume() {

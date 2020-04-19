@@ -32,6 +32,7 @@ class Home : AppCompatActivity(),
     lateinit var ft: FragmentTransaction
     lateinit var app: RecipesApp
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.home)
