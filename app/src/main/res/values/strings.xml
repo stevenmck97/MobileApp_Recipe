@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Recipes</string>
-    <string name="action_recipe">Recipe</string>
-    <string name="action_report">Report</string>
+    <string name="action_recipe">Add a Recipe</string>
+    <string name="action_report">Your Recipe List</string>
     <string name="recipeTitle">Welcome Homer</string>
     <string name="recipeSubtitle">Please Give Generously</string>
     <string name="recipeButton">Recipe</string>
@@ -18,20 +18,20 @@
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Recipes (Lab K12)</string>
-    <string name="nav_header_subtitle">voteforhomer@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">USER NAME HERE</string>
+    <string name="nav_header_subtitle">placeholder@gmail.com</string>
+    <string name="nav_header_desc">Test</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_recipe">Recipe</string>
-    <string name="menu_report">Report</string>
+    <string name="menu_recipe">Add a Recipe</string>
+    <string name="menu_report">Your Recipe List</string>
     <string name="menu_favourites">Favourites</string>
     <string name="menu_about">About Us</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string name="aboutus_title">Homer for President !!</string>
-    <string name="aboutus_message">Hi, I\'m Homer\n\nPlease vote for me.\n\n Please Please Please Please!!</string>
+    <string name="aboutus_title">About Us</string>
+    <string name="aboutus_message">test</string>
 
     <string name="messageLoading">Please wait while we Connect to the Server...</string>
 

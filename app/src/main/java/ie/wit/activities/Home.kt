@@ -12,6 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.location.LocationServices
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
@@ -43,6 +44,10 @@ class Home : AppCompatActivity(),
 //            latitude = 52.245696
 //            longitude = -7.139102
 //        }
+
+        val bottomNavView: BottomNavigationView = findViewById(R.id.navigation)
+        bottomNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
 
         app.locationClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -77,6 +82,26 @@ class Home : AppCompatActivity(),
 
     }
 
+
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_recipe -> {
+                    navigateTo(RecipeFragment.newInstance())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.nav_report -> {
+                    navigateTo(ReportFragment.newInstance())
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.nav_report_all -> {
+                    navigateTo(ReportAllFragment.newInstance())
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -103,14 +128,14 @@ class Home : AppCompatActivity(),
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.action_recipe -> toast("You Selected Recipe")
-            R.id.action_report -> toast("You Selected Report")
-        }
-        return super.onOptionsItemSelected(item)
-    }
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+//
+//        when (item.itemId) {
+//            R.id.action_recipe -> toast("You Selected Recipe")
+//            R.id.action_report -> toast("You Selected Report")
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))

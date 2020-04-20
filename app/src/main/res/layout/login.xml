@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_100"
+    android:background="@drawable/food_background_1"
     android:orientation="vertical"
     android:weightSum="4">
 
@@ -17,25 +17,26 @@
         <ImageView
             android:id="@+id/icon"
             style="@style/ThemeOverlay.FirebaseIcon"
-            android:layout_width="286dp"
-            android:layout_height="325dp"
+            android:layout_width="wrap_content"
+            android:layout_height="393dp"
             android:contentDescription="@string/desc_firebase_lockup"
-            android:src="@drawable/login_homer" />
+            android:src="@drawable/recipe_logo" />
 
         <TextView
             android:id="@+id/titleText"
-            android:layout_width="wrap_content"
+            android:layout_width="141dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/title_bottom_margin"
             android:text="@string/emailpassword_title_text"
-            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
             android:theme="@style/ThemeOverlay.MyTitleText" />
 
         <TextView
             android:id="@+id/status"
             style="@style/ThemeOverlay.MyTextDetail"
             android:text="@string/signed_out"
-            android:textColor="@color/colorWhite" />
+            android:textStyle="bold"
+             />
 
         <TextView
             android:id="@+id/detail"
