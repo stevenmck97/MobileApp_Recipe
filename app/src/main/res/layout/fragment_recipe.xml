@@ -32,70 +32,31 @@
 <!--    </com.google.android.material.appbar.AppBarLayout>-->
 
 
-    <TextView
-        android:id="@+id/welcomeTitle"
-        android:layout_width="188dp"
-        android:layout_height="30dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/welcomeTitle"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/homeTextWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
-
-    <TextView
-        android:id="@+id/recipeSubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/recipeTitle"
-        android:layout_alignEnd="@+id/recipeTitle"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/recipeSubtitle"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/homeTextWhite"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.531" />
-
     <ImageView
         android:id="@+id/imagefavourite"
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="616dp"
+        android:layout_marginTop="356dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/recipeTitle"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@android:drawable/star_big_off" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="224dp"
-        android:layout_height="221dp"
+        android:id="@+id/recipeImageView"
+        android:layout_width="411dp"
+        android:layout_height="307dp"
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266"
+        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/foodicon" />
 
     <EditText
@@ -115,10 +76,9 @@
         android:textColorHint="@color/textHintColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.668" />
 
     <EditText
         android:id="@+id/recipeDescription"
@@ -155,11 +115,9 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
-
+        app:layout_constraintVertical_bias="0.931" />
 
 
     <!--    <Button-->

@@ -63,6 +63,7 @@ class Home : AppCompatActivity(),
         //Checking if Google User, upload google profile pic
 
         checkExistingPhoto(app,this)
+        checkExistingPhoto2(app,this)
 
         navView.getHeaderView(0).imageView
             .setOnClickListener { showImagePicker(this,1) }

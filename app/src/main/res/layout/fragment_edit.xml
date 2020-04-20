@@ -12,29 +12,31 @@
 
     <Button
         android:id="@+id/editUpdateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="143dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
         android:text="@string/action_update"
         android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recipeDescription"
-        app:layout_constraintVertical_bias="0.329" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="224dp"
-        android:layout_height="221dp"
-        android:clickable="true"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266"
-        app:srcCompat="@drawable/foodicon" />
+        app:layout_constraintVertical_bias="0.931" />
 
+
+    <ImageView
+        android:id="@+id/recipeImageView"
+        android:layout_width="411dp"
+        android:layout_height="307dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/foodicon" />
 
     <EditText
         android:id="@+id/recipeTitle"
@@ -53,10 +55,9 @@
         android:textColorHint="@color/textHintColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.643" />
+        app:layout_constraintVertical_bias="0.668" />
 
     <EditText
         android:id="@+id/recipeDescription"
@@ -93,6 +94,6 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095" />
+        app:layout_constraintVertical_bias="0.863" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

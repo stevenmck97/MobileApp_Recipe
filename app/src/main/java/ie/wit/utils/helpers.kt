@@ -22,8 +22,11 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import ie.wit.R
 import ie.wit.main.RecipesApp
+import ie.wit.models.RecipePhotoModel
 import ie.wit.models.UserPhotoModel
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
+import kotlinx.android.synthetic.main.fragment_edit.*
+import kotlinx.android.synthetic.main.fragment_edit.view.*
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import java.io.ByteArrayOutputStream
@@ -84,11 +87,11 @@ fun uploadImageView(app: RecipesApp, imageView: ImageView) {
         }.addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 app.userImage = task.result!!.toString().toUri()
-                app.recipeImage = task.result!!.toString().toUri()
+//                app.recipeImage = task.result!!.toString().toUri()
                 updateAllRecipes(app)
                 writeImageRef(app,app.userImage.toString())
-                writeImageRef(app,app.recipeImage.toString())
-                Picasso.get().load(app.recipeImage)
+//                writeImageRef(app,app.recipeImage.toString())
+//                Picasso.get().load(app.recipeImage)
                 Picasso.get().load(app.userImage)
                     .resize(180, 180)
                     .transform(CropCircleTransformation())
@@ -107,14 +110,14 @@ fun showImagePicker(parent: Activity, id: Int) {
     parent.startActivityForResult(chooser, id)
 }
 
-fun showImagePicker2(parent: Fragment, id: Int) {
-    val intent = Intent()
-    intent.type = "image/*"
-    intent.action = Intent.ACTION_OPEN_DOCUMENT
-    intent.addCategory(Intent.CATEGORY_OPENABLE)
-    val chooser = Intent.createChooser(intent, R.string.select_recipe_image.toString())
-    parent.startActivityForResult(chooser, id)
-}
+//fun showImagePicker2(parent: Fragment, id: Int) {
+//    val intent = Intent()
+//    intent.type = "image/*"
+//    intent.action = Intent.ACTION_OPEN_DOCUMENT
+//    intent.addCategory(Intent.CATEGORY_OPENABLE)
+//    val chooser = Intent.createChooser(intent, R.string.select_recipe_image.toString())
+//    parent.startActivityForResult(chooser, id)
+//}
 
 fun readImageUri(resultCode: Int, data: Intent?): Uri? {
     var uri: Uri? = null
@@ -131,33 +134,33 @@ fun updateAllRecipes(app: RecipesApp) {
     val userId = app.auth.currentUser!!.uid
     val userEmail = app.auth.currentUser!!.email
     val recipesRef = app.database.ref.child("recipes")
-                                  .orderByChild("email")
+        .orderByChild("email")
     val userrecipesRef = app.database.ref.child("user-recipes")
-                                  .child(userId).orderByChild("uid")
+        .child(userId).orderByChild("uid")
 
     recipesRef.equalTo(userEmail).addListenerForSingleValueEvent(
         object : ValueEventListener {
-        override fun onCancelled(error: DatabaseError) {}
-        override fun onDataChange(snapshot: DataSnapshot) {
-            snapshot.children.forEach {
-                it.ref.child("profilepic")
-                    .setValue(app.userImage.toString())
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("profilepic")
+                        .setValue(app.userImage.toString())
+                }
             }
-        }
-    })
+        })
     userrecipesRef.addListenerForSingleValueEvent(
         object : ValueEventListener {
-        override fun onCancelled(error: DatabaseError) {}
-        override fun onDataChange(snapshot: DataSnapshot) {
-            snapshot.children.forEach {
-                it.ref.child("profilepic")
-                    .setValue(app.userImage.toString(), app.recipeImage.toString())
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("profilepic")
+                        .setValue(app.userImage.toString())
 
+                }
             }
-        }
-    })
+        })
     writeImageRef(app, app.userImage.toString())
-    writeImageRef(app, app.recipeImage.toString())
+//    writeImageRef(app, app.recipeImage.toString())
 }
 
 fun writeImageRef(app: RecipesApp, imageRef: String) {
@@ -179,8 +182,8 @@ fun validatePhoto(app: RecipesApp, activity: Activity) {
 
     if (googlePhotoExists || imageExists) {
         if(!app.auth.currentUser?.displayName.isNullOrEmpty())
-        activity.navView.getHeaderView(0)
-            .nav_header_name.text = app.auth.currentUser?.displayName
+            activity.navView.getHeaderView(0)
+                .nav_header_name.text = app.auth.currentUser?.displayName
         else
             activity.navView.getHeaderView(0)
                 .nav_header_name.text = activity.getText(R.string.nav_header_title)
@@ -210,13 +213,165 @@ fun checkExistingPhoto(app: RecipesApp, activity: Activity) {
         .equalTo(app.auth.currentUser!!.uid)
         .addListenerForSingleValueEvent(object : ValueEventListener {
 
-        override fun onDataChange(snapshot: DataSnapshot ) {
-            snapshot.children.forEach {
-                val usermodel = it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
-                app.userImage = usermodel!!.profilepic.toUri()
+            override fun onDataChange(snapshot: DataSnapshot ) {
+                snapshot.children.forEach {
+                    val usermodel = it.getValue<UserPhotoModel>(UserPhotoModel::class.java)
+                    app.userImage = usermodel!!.profilepic.toUri()
+                }
+                validatePhoto(app,activity)
             }
-            validatePhoto(app,activity)
+            override fun onCancelled(databaseError: DatabaseError ) {}
+        })
+}
+
+
+
+
+
+
+fun uploadImageView2(app: RecipesApp, recipeImageView: ImageView) {
+    val uid = app.auth.currentUser!!.uid
+    val imageRef = app.storage.child("photos").child("${uid}.jpg")
+    val uploadTask = imageRef.putBytes(convertImageToBytes(recipeImageView))
+
+    uploadTask.addOnFailureListener { object : OnFailureListener {
+        override fun onFailure(error: Exception) {
+            Log.v("Recipes", "uploadTask.exception" + error)
         }
-       override fun onCancelled(databaseError: DatabaseError ) {}
-    })
+    }
+    }.addOnSuccessListener {
+        uploadTask.continueWithTask { task ->
+            imageRef.downloadUrl
+        }.addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+//                app.userImage = task.result!!.toString().toUri()
+                app.recipeImage = task.result!!.toString().toUri()
+                updateAllRecipes2(app)
+//                writeImageRef2(app,app.userImage.toString())
+                writeImageRef2(app,app.recipeImage.toString())
+                Picasso.get().load(app.recipeImage)
+//                Picasso.get().load(app.userImage)
+//                    .resize(180, 180)
+//                    .transform(CropCircleTransformation())
+                    .into(recipeImageView)
+            }
+        }
+    }
+}
+
+
+
+fun showImagePicker3(parent: Fragment, id: Int) {
+    val intent = Intent()
+    intent.type = "image/*"
+    intent.action = Intent.ACTION_OPEN_DOCUMENT
+    intent.addCategory(Intent.CATEGORY_OPENABLE)
+    val chooser = Intent.createChooser(intent, R.string.select_recipe_image.toString())
+    parent.startActivityForResult(chooser, id)
+}
+
+fun readImageUri2(resultCode: Int, data: Intent?): Uri? {
+    var uri: Uri? = null
+    if (resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+        try { uri = data.data }
+        catch (e: IOException) {
+            e.printStackTrace()
+        }
+    }
+    return uri
+}
+
+fun updateAllRecipes2(app: RecipesApp) {
+    val userId = app.auth.currentUser!!.uid
+    val userEmail = app.auth.currentUser!!.email
+    val recipesRef = app.database.ref.child("recipes")
+        .orderByChild("email")
+    val userrecipesRef = app.database.ref.child("user-recipes")
+        .child(userId).orderByChild("uid")
+
+    recipesRef.equalTo(userEmail).addListenerForSingleValueEvent(
+        object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("recipestoreimage")
+                        .setValue(app.recipeImage.toString())
+                }
+            }
+        })
+    userrecipesRef.addListenerForSingleValueEvent(
+        object : ValueEventListener {
+            override fun onCancelled(error: DatabaseError) {}
+            override fun onDataChange(snapshot: DataSnapshot) {
+                snapshot.children.forEach {
+                    it.ref.child("recipestoreimage")
+                        .setValue(app.recipeImage.toString())
+
+                }
+            }
+        })
+//    writeImageRef2(app, app.userImage.toString())
+    writeImageRef2(app, app.recipeImage.toString())
+}
+
+fun writeImageRef2(app: RecipesApp, imageRef: String) {
+    val userId = app.auth.currentUser!!.uid
+    val values = RecipePhotoModel(userId,imageRef).toMap()
+    val childUpdates = HashMap<String, Any>()
+
+    childUpdates["/user-recipeImages/$userId"] = values
+    app.database.updateChildren(childUpdates)
+}
+
+//fun validatePhoto2(app: RecipesApp, activity: Activity) {
+//    var imageUri: Uri? = null
+//    val imageExists = app.recipeImage.toString().length > 0
+//    val googlePhotoExists = app.auth.currentUser?.photoUrl != null
+//    val recipesRef = app.auth.data
+//
+//    if(imageExists) imageUri = app.recipeImage
+//    else if (recipesRef) imageUri = app.auth.currentUser?.photoUrl!!
+//
+//    if (googlePhotoExists || imageExists) {
+////        if(!app.auth.currentUser?.displayName.isNullOrEmpty())
+////            activity.navView.getHeaderView(0)
+////                .nav_header_name.text = app.auth.currentUser?.displayName
+////        else
+////            activity.navView.getHeaderView(0)
+////                .nav_header_name.text = activity.getText(R.string.nav_header_title)
+//
+//        Picasso.get().load(imageUri)
+////            .resize(180, 180)
+////            .transform(CropCircleTransformation())
+//            .into(activity.recipeImageView, object : Callback {
+//                override fun onSuccess() {
+//                    uploadImageView2(app,
+//                        activity.recipeImageView)
+//                }
+//                override fun onError(e: Exception) {}
+//            })
+//    }
+//    else {   // New Regular User, upload default pic of homer
+//        activity.recipeImageView
+//            .setImageResource(R.mipmap.ic_launcher_homer_round)
+//        uploadImageView2(app, activity.recipeImageView)
+//    }
+//}
+
+fun checkExistingPhoto2(app: RecipesApp, activity: Activity) {
+
+    app.recipeImage = "".toUri()
+    app.database.child("user-recipeImages").orderByChild("uid")
+        .equalTo(app.auth.currentUser!!.uid)
+        .addListenerForSingleValueEvent(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot ) {
+                snapshot.children.forEach {
+                    val recipemodel = it.getValue<RecipePhotoModel>(RecipePhotoModel::class.java)
+                    app.recipeImage = recipemodel!!.recipestoreimage.toUri()
+                }
+//                    validatePhoto2(app,activity)
+            }
+            override fun onCancelled(databaseError: DatabaseError ) {}
+        })
 }

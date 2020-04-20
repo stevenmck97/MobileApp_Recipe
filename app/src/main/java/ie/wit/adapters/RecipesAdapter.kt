@@ -10,6 +10,9 @@ import ie.wit.R
 import ie.wit.models.RecipesModel
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_recipes.view.*
+import kotlinx.android.synthetic.main.card_recipes.view.recipeDescription
+import kotlinx.android.synthetic.main.card_recipes.view.recipeTitle
+import kotlinx.android.synthetic.main.fragment_edit.view.*
 
 interface RecipesListener {
     fun onRecipesClick(recipes: RecipesModel)
@@ -51,6 +54,7 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
 //            itemView.paymentmethod.text = recipes.paymenttype
             itemView.recipeTitle.text = recipes.title
             itemView.recipeDescription.text = recipes.description
+//            Picasso.get().load(recipes.recipestoreimage.toUri()).into(itemView.recipeImageView)
             if(recipes.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
 
             if(!reportAll)

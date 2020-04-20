@@ -24,7 +24,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_about_us.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
 import kotlinx.android.synthetic.main.fragment_recipe.view.*
-import kotlinx.android.synthetic.main.fragment_recipe.view.imageView
+
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 //import kotlinx.android.synthetic.main.nav_header_home.view.*
@@ -39,7 +39,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     lateinit var app: RecipesApp
     var recipe = RecipesModel()
-    var ImageView = imageView
+
     lateinit var loader : AlertDialog
     lateinit var eventListener : ValueEventListener
     var favourite = false
@@ -93,7 +93,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
             title = recipeTitle.text.toString(),
             description = recipeDescription.text.toString(),
             profilepic = app.userImage.toString(),
-            recipeImage = app.recipeImage.toString(),
+            recipestoreimage = app.recipeImage.toString(),
             isfavourite = favourite,
             latitude = app.currentLocation.latitude,
             longitude = app.currentLocation.longitude,
@@ -123,7 +123,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
     }
 
     fun setImageListener (layout: View) {
-        layout.imageView.setOnClickListener { showImagePicker2(this,1) }
+        layout.recipeImageView.setOnClickListener { showImagePicker3(this,1) }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -132,12 +132,12 @@ class RecipeFragment : Fragment(), AnkoLogger {
         when (requestCode) {
             1 -> {
                 if (data != null) {
-                    writeImageRef(app,readImageUri(resultCode, data).toString())
-                    Picasso.get().load(readImageUri(resultCode, data).toString())
-                        .into(imageView, object : Callback {
+                    writeImageRef2(app,readImageUri2(resultCode, data).toString())
+                    Picasso.get().load(readImageUri2(resultCode, data).toString())
+                        .into(recipeImageView, object : Callback {
                             override fun onSuccess() {
                                 // Drawable is ready
-                                uploadImageView(app,imageView)
+                                uploadImageView2(app,recipeImageView)
                             }
                             override fun onError(e: Exception) {}
                         })
