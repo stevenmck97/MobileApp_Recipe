@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -45,6 +46,8 @@ class Home : AppCompatActivity(),
 //            longitude = -7.139102
 //        }
 
+//        ft.setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
+
         val bottomNavView: BottomNavigationView = findViewById(R.id.navigation)
         bottomNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
@@ -74,7 +77,7 @@ class Home : AppCompatActivity(),
             .setOnClickListener { showImagePicker(this,1) }
 
         ft = supportFragmentManager.beginTransaction()
-
+        
         val fragment = RecipeFragment.newInstance()
         ft.replace(R.id.homeFrame, fragment)
         ft.commit()
