@@ -2,18 +2,10 @@
     <string name="app_name">Recipes</string>
     <string name="action_recipe">Add a Recipe</string>
     <string name="action_report">Your Recipe List</string>
-    <string name="recipeTitle">Welcome Homer</string>
+    <string name="recipeTitle">Welcome User</string>
     <string name="recipeSubtitle">Please Give Generously</string>
     <string name="recipeButton">Recipe</string>
-<!--    <string name="paypal">PayPal</string>-->
-<!--    <string name="direct">Direct</string>-->
-<!--    <string name="amount">Amount</string>-->
-<!--    <string name="total">Total so Far</string>-->
-<!--    <string name="totalSoFar">$ Total</string>-->
     <string name="reportTitle">Recipes Report</string>
-<!--    <string name="defaultAmount">00</string>-->
-<!--    <string name="defaultMethod">N/A</string>-->
-<!--    <string name="enter_amount">Enter Amount</string>-->
 
     <string name="title_activity_home">Home</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

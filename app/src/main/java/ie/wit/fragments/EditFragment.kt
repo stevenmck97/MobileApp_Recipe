@@ -8,25 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
-import androidx.core.net.toUri
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-
 import ie.wit.R
 import ie.wit.main.RecipesApp
 import ie.wit.models.RecipesModel
 import ie.wit.utils.*
-import kotlinx.android.synthetic.main.fragment_about_us.view.*
 import kotlinx.android.synthetic.main.fragment_edit.view.*
 import kotlinx.android.synthetic.main.fragment_edit.view.recipeDescription
 import kotlinx.android.synthetic.main.fragment_edit.view.recipeImageView
 import kotlinx.android.synthetic.main.fragment_edit.view.recipeTitle
-import kotlinx.android.synthetic.main.fragment_recipe.*
-import kotlinx.android.synthetic.main.fragment_recipe.view.*
+import kotlinx.android.synthetic.main.fragment_recipe.recipeImageView
+
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 
@@ -36,6 +32,7 @@ class EditFragment : Fragment(), AnkoLogger {
     lateinit var loader : AlertDialog
     lateinit var root: View
     var editRecipes: RecipesModel? = null
+    var favourite = false
 
 
 
@@ -74,7 +71,8 @@ class EditFragment : Fragment(), AnkoLogger {
             updateUserRecipes(app.auth.currentUser!!.uid,
                                editRecipes!!.uid, editRecipes!!)
         }
-        setImageListener(root)
+//        setImageListener(root)
+//          setFavouriteListener(root)
 //        setEditImageListener(root)
         return root
     }
@@ -88,6 +86,22 @@ class EditFragment : Fragment(), AnkoLogger {
                 }
             }
     }
+
+//    fun setFavouriteListener (layout: View) {
+//        layout.imagefavourite.setOnClickListener(object : View.OnClickListener {
+//            override fun onClick(view: View?) {
+//                if (!favourite) {
+//                    layout.imagefavourite.setImageResource(R.drawable.ic_favorite_on)
+//                    favourite = true
+//                }
+//                else {
+//                    layout.imagefavourite.setImageResource(R.drawable.ic_favorite_off)
+//                    favourite = false
+//
+//                }
+//            }
+//        })
+//    }
 
     fun setImageListener (layout: View) {
         layout.recipeImageView.setOnClickListener { showImagePicker3(this,1) }

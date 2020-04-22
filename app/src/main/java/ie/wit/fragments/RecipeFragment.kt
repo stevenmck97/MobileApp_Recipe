@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
@@ -22,7 +23,11 @@ import ie.wit.models.RecipesModel
 import ie.wit.utils.*
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.fragment_about_us.*
+import kotlinx.android.synthetic.main.fragment_edit.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
+import kotlinx.android.synthetic.main.fragment_recipe.recipeDescription
+import kotlinx.android.synthetic.main.fragment_recipe.recipeImageView
+import kotlinx.android.synthetic.main.fragment_recipe.recipeTitle
 import kotlinx.android.synthetic.main.fragment_recipe.view.*
 
 import kotlinx.android.synthetic.main.home.*
@@ -30,6 +35,7 @@ import kotlinx.android.synthetic.main.nav_header_home.view.*
 //import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 //import org.jetbrains.anko.toast
 //import java.lang.String.format
 import java.util.HashMap
@@ -39,7 +45,6 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     lateinit var app: RecipesApp
     var recipe = RecipesModel()
-
     lateinit var loader : AlertDialog
     lateinit var eventListener : ValueEventListener
     var favourite = false
@@ -86,9 +91,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     fun setButtonListener( layout: View) {
         layout.btnAdd.setOnClickListener {
-//            val amount = if (
-//                layout.recipeTitle.text.isNotEmpty()
-//                layout.recipeTitle.text.toString().toInt()
+
             writeNewRecipes(RecipesModel(
             title = recipeTitle.text.toString(),
             description = recipeDescription.text.toString(),
@@ -100,22 +103,21 @@ class RecipeFragment : Fragment(), AnkoLogger {
             email = app.auth.currentUser?.email))
 
 
-//                val paymentmethod = if(layout.paymentMethod.checkedRadioButtonId == R.id.Direct) "Direct" else "Paypal"
-//                writeNewRecipes(RecipesModel(paymenttype = paymentmethod, amount = amount,
-
             }
         }
+
+
 
 
     fun setFavouriteListener (layout: View) {
         layout.imagefavourite.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 if (!favourite) {
-                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_on)
+                    layout.imagefavourite.setImageResource(R.drawable.ic_favorite_on)
                     favourite = true
                 }
                 else {
-                    layout.imagefavourite.setImageResource(android.R.drawable.star_big_off)
+                    layout.imagefavourite.setImageResource(R.drawable.ic_favorite_off)
                     favourite = false
                 }
             }
@@ -148,7 +150,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     override fun onResume() {
         super.onResume()
-        getTotalReciped(app.auth.currentUser?.uid)
+        getAllRecipes(app.auth.currentUser?.uid)
     }
 
     override fun onPause() {
@@ -182,18 +184,18 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     }
 
-    fun getTotalReciped(userId: String?) {
+    fun getAllRecipes(userId: String?) {
         eventListener = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 info("Firebase Recipes error : ${error.message}")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-//                totalReciped = 0
+
                 val children = snapshot.children
                 children.forEach {
                     val recipes = it.getValue<RecipesModel>(RecipesModel::class.java)
-//                    totalReciped += recipes!!.amount
+
                 }
 
             }

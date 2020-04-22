@@ -5,9 +5,7 @@ import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.Window
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -125,20 +123,6 @@ class Home : AppCompatActivity(),
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_home, menu)
-        return true
-    }
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//
-//        when (item.itemId) {
-//            R.id.action_recipe -> toast("You Selected Recipe")
-//            R.id.action_report -> toast("You Selected Report")
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 
     override fun onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.START))

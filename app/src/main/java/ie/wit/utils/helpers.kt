@@ -40,7 +40,7 @@ fun createLoader(activity: FragmentActivity) : AlertDialog {
         .setView(R.layout.loading)
     var loader = loaderBuilder.create()
     loader.setTitle(R.string.app_name)
-    loader.setIcon(R.mipmap.ic_launcher_homer_round)
+    loader.setIcon(R.mipmap.ic_launcher_food_round)
 
     return loader
 }
@@ -199,9 +199,9 @@ fun validatePhoto(app: RecipesApp, activity: Activity) {
                 override fun onError(e: Exception) {}
             })
     }
-    else {   // New Regular User, upload default pic of homer
+    else {   // New Regular User, upload default pic of food
         activity.navView.getHeaderView(0).imageView
-            .setImageResource(R.mipmap.ic_launcher_homer_round)
+            .setImageResource(R.mipmap.ic_launcher_food_round)
         uploadImageView(app, activity.navView.getHeaderView(0).imageView)
     }
 }
@@ -351,9 +351,9 @@ fun writeImageRef2(app: RecipesApp, imageRef: String) {
 //                override fun onError(e: Exception) {}
 //            })
 //    }
-//    else {   // New Regular User, upload default pic of homer
+//    else {   // New Regular User, upload default pic of food
 //        activity.recipeImageView
-//            .setImageResource(R.mipmap.ic_launcher_homer_round)
+//            .setImageResource(R.mipmap.ic_launcher_food_round)
 //        uploadImageView2(app, activity.recipeImageView)
 //    }
 //}

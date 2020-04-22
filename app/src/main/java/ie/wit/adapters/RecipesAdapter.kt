@@ -12,7 +12,7 @@ import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_recipes.view.*
 import kotlinx.android.synthetic.main.card_recipes.view.recipeDescription
 import kotlinx.android.synthetic.main.card_recipes.view.recipeTitle
-import kotlinx.android.synthetic.main.fragment_edit.view.*
+
 
 interface RecipesListener {
     fun onRecipesClick(recipes: RecipesModel)
@@ -50,12 +50,12 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
 
         fun bind(recipes: RecipesModel, listener: RecipesListener, reportAll: Boolean) {
             itemView.tag = recipes
-//            itemView.paymentamount.text = recipes.amount.toString()
-//            itemView.paymentmethod.text = recipes.paymenttype
             itemView.recipeTitle.text = recipes.title
             itemView.recipeDescription.text = recipes.description
 //            Picasso.get().load(recipes.recipestoreimage.toUri()).into(itemView.recipeImageView)
-            if(recipes.isfavourite) itemView.imagefavourite.setImageResource(android.R.drawable.star_big_on)
+            if(recipes.isfavourite) itemView.imagefavourite.setImageResource(R.drawable.ic_favorite_on)
+
+
 
             if(!reportAll)
                 itemView.setOnClickListener { listener.onRecipesClick(recipes) }
@@ -67,7 +67,7 @@ class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
                     .into(itemView.imageIcon)
             }
             else
-                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_homer_round)
+                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_food_round)
         }
     }
 }
