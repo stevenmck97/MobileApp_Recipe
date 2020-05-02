@@ -11,8 +11,10 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
@@ -29,7 +31,6 @@ open class ReportFragment : Fragment(), AnkoLogger,
     RecipesListener {
 
     lateinit var app: RecipesApp
-    lateinit var loader : AlertDialog
     lateinit var root: View
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,15 +47,23 @@ open class ReportFragment : Fragment(), AnkoLogger,
         activity?.title = getString(R.string.action_report)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference
+            .child("user-recipes").child(app.currentUser.uid)
+
+        var options = FirebaseRecyclerOptions.Builder<RecipesModel>()
+            .setQuery(query, RecipesModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.recyclerView.adapter = RecipesAdapter(options, this)
 
         val swipeDeleteHandler = object : SwipeToDeleteCallback(activity!!) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val adapter = root.recyclerView.adapter as RecipesAdapter
-                adapter.removeAt(viewHolder.adapterPosition)
                 deleteRecipes((viewHolder.itemView.tag as RecipesModel).uid)
-                deleteUserRecipes(app.auth.currentUser!!.uid,
-                                  (viewHolder.itemView.tag as RecipesModel).uid)
+                deleteUserRecipes(app.currentUser!!.uid,
+                    (viewHolder.itemView.tag as RecipesModel).uid)
             }
         }
         val itemTouchDeleteHelper = ItemTouchHelper(swipeDeleteHandler)
@@ -77,19 +86,6 @@ open class ReportFragment : Fragment(), AnkoLogger,
             ReportFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    open fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.swiperefresh.isRefreshing = true
-                getAllRecipes(app.auth.currentUser!!.uid)
-            }
-        })
-    }
-
-    fun checkSwipeRefresh() {
-        if (root.swiperefresh.isRefreshing) root.swiperefresh.isRefreshing = false
     }
 
     fun deleteUserRecipes(userId: String, uid: String?) {
@@ -124,41 +120,5 @@ open class ReportFragment : Fragment(), AnkoLogger,
             .replace(R.id.homeFrame, EditFragment.newInstance(recipes))
             .addToBackStack(null)
             .commit()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if(this::class == ReportFragment::class)
-            getAllRecipes(app.auth.currentUser!!.uid)
-    }
-
-    fun getAllRecipes(userId: String?) {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading Recipes from Firebase")
-        val recipesList = ArrayList<RecipesModel>()
-        app.database.child("user-recipes").child(userId!!)
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Recipes error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val recipes = it.
-                            getValue<RecipesModel>(RecipesModel::class.java)
-
-                        recipesList.add(recipes!!)
-                        root.recyclerView.adapter =
-                            RecipesAdapter(recipesList, this@ReportFragment,false)
-                        root.recyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("user-recipes").child(userId)
-                            .removeEventListener(this)
-                    }
-                }
-            })
     }
 }

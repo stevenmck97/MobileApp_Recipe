@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 import ie.wit.R
@@ -31,7 +33,16 @@ class ReportAllFragment : ReportFragment(),
         activity?.title = getString(R.string.menu_report_all)
 
         root.recyclerView.setLayoutManager(LinearLayoutManager(activity))
-        setSwipeRefresh()
+
+        var query = FirebaseDatabase.getInstance()
+            .reference.child("recipes")
+
+        var options = FirebaseRecyclerOptions.Builder<RecipesModel>()
+            .setQuery(query, RecipesModel::class.java)
+            .setLifecycleOwner(this)
+            .build()
+
+        root.recyclerView.adapter = RecipesAdapter(options, this)
 
         return root
     }
@@ -42,48 +53,5 @@ class ReportAllFragment : ReportFragment(),
             ReportAllFragment().apply {
                 arguments = Bundle().apply { }
             }
-    }
-
-    override fun setSwipeRefresh() {
-        root.swiperefresh.setOnRefreshListener(object : SwipeRefreshLayout.OnRefreshListener {
-            override fun onRefresh() {
-                root.swiperefresh.isRefreshing = true
-                getAllUsersRecipes()
-            }
-        })
-    }
-
-    override fun onResume() {
-        super.onResume()
-        getAllUsersRecipes()
-    }
-
-    fun getAllUsersRecipes() {
-        loader = createLoader(activity!!)
-        showLoader(loader, "Downloading All Users Recipes from Firebase")
-        val recipesList = ArrayList<RecipesModel>()
-        app.database.child("recipes")
-            .addValueEventListener(object : ValueEventListener {
-                override fun onCancelled(error: DatabaseError) {
-                    info("Firebase Recipes error : ${error.message}")
-                }
-
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    hideLoader(loader)
-                    val children = snapshot.children
-                    children.forEach {
-                        val recipes = it.
-                            getValue<RecipesModel>(RecipesModel::class.java)
-
-                        recipesList.add(recipes!!)
-                        root.recyclerView.adapter =
-                            RecipesAdapter(recipesList, this@ReportAllFragment,true)
-                        root.recyclerView.adapter?.notifyDataSetChanged()
-                        checkSwipeRefresh()
-
-                        app.database.child("recipes").removeEventListener(this)
-                    }
-                }
-            })
     }
 }

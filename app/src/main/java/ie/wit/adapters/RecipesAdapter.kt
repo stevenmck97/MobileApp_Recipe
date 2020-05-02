@@ -7,67 +7,69 @@ import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ie.wit.R
+import ie.wit.fragments.ReportAllFragment
 import ie.wit.models.RecipesModel
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.card_recipes.view.*
 import kotlinx.android.synthetic.main.card_recipes.view.recipeDescription
 import kotlinx.android.synthetic.main.card_recipes.view.recipeTitle
+import com.firebase.ui.database.FirebaseRecyclerAdapter
+import com.firebase.ui.database.FirebaseRecyclerOptions
 
 
 interface RecipesListener {
     fun onRecipesClick(recipes: RecipesModel)
 }
 
-class RecipesAdapter constructor(var recipes: ArrayList<RecipesModel>,
-                                  private val listener: RecipesListener, reportall : Boolean)
-    : RecyclerView.Adapter<RecipesAdapter.MainHolder>() {
+class RecipesAdapter(options: FirebaseRecyclerOptions<RecipesModel>,
+                      private val listener: RecipesListener?)
+    : FirebaseRecyclerAdapter<RecipesModel,
+        RecipesAdapter.RecipesViewHolder>(options) {
 
-    val reportAll = reportall
+    class RecipesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        return MainHolder(
-            LayoutInflater.from(parent.context).inflate(
-                R.layout.card_recipes,
-                parent,
-                false
-            )
-        )
-    }
+        fun bind(recipes: RecipesModel, listener: RecipesListener) {
+            with(recipes) {
+                itemView.tag = recipes
+                itemView.recipeTitle.text = recipes.title
+                itemView.recipeDescription.text = recipes.description
 
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val recipes = recipes[holder.adapterPosition]
-        holder.bind(recipes,listener,reportAll)
-    }
-
-    override fun getItemCount(): Int = recipes.size
-
-    fun removeAt(position: Int) {
-        recipes.removeAt(position)
-        notifyItemRemoved(position)
-    }
-
-    class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind(recipes: RecipesModel, listener: RecipesListener, reportAll: Boolean) {
-            itemView.tag = recipes
-            itemView.recipeTitle.text = recipes.title
-            itemView.recipeDescription.text = recipes.description
 //            Picasso.get().load(recipes.recipestoreimage.toUri()).into(itemView.recipeImageView)
-            if(recipes.isfavourite) itemView.imagefavourite.setImageResource(R.drawable.ic_favorite_on)
 
+                if(listener is ReportAllFragment)
+                    ; // Do Nothing, Don't Allow 'Clickable' Rows
+                else
+                    itemView.setOnClickListener { listener.onRecipesClick(recipes) }
 
+                if(recipes.isfavourite) itemView.imagefavourite.setImageResource(R.drawable.ic_favorite_on)
 
-            if(!reportAll)
-                itemView.setOnClickListener { listener.onRecipesClick(recipes) }
+                if(!recipes.profilepic.isEmpty()) {
+                    Picasso.get().load(recipes.profilepic.toUri())
+                        //.resize(180, 180)
+                        .transform(CropCircleTransformation())
+                        .into(itemView.imageIcon)
+                }
+                else
+                    itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_food_round)
 
-            if(!recipes.profilepic.isEmpty()) {
-                Picasso.get().load(recipes.profilepic.toUri())
-                    //.resize(180, 180)
-                    .transform(CropCircleTransformation())
-                    .into(itemView.imageIcon)
             }
-            else
-                itemView.imageIcon.setImageResource(R.mipmap.ic_launcher_food_round)
         }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipesViewHolder {
+
+        return RecipesViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.card_recipes, parent, false))
+    }
+
+    override fun onBindViewHolder(holder: RecipesViewHolder, position: Int, model: RecipesModel) {
+        holder.bind(model,listener!!)
+    }
+
+    override fun onDataChanged() {
+        // Called each time there is a new data snapshot. You may want to use this method
+        // to hide a loading spinner or check for the "no documents" state and update your UI.
+        // ...
     }
 }

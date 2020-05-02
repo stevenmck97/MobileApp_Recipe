@@ -1,5 +1,6 @@
 package ie.wit.activities
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -8,6 +9,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.firebase.ui.auth.AuthMethodPickerLayout
+import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.auth.IdpResponse
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -30,260 +34,85 @@ import org.jetbrains.anko.startActivity
 class Login : AppCompatActivity(), View.OnClickListener {
 
     lateinit var app: RecipesApp
-    lateinit var loader : AlertDialog
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login)
+        //setContentView(R.layout.login)
         app = application as RecipesApp
-        // Buttons
-        emailSignInButton.setOnClickListener(this)
-        emailCreateAccountButton.setOnClickListener(this)
-        signOutButton.setOnClickListener(this)
-        verifyEmailButton.setOnClickListener(this)
-        sign_in_button.setOnClickListener(this)
 
-        app.auth = FirebaseAuth.getInstance()
-
-        // [START config_signin]
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        // [END config_signin]
-
-        app.googleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        loader = createLoader(this)
-
-        sign_in_button.setSize(SignInButton.SIZE_WIDE)
-        sign_in_button.setColorScheme(0)
-
-
+        checkSignedIn()
     }
 
-    public override fun onStart() {
-        super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = app.auth.currentUser
-        updateUI(currentUser)
-    }
-
-    private fun createAccount(email: String, password: String) {
-        Log.d(TAG, "createAccount:$email")
-        if (!validateForm()) {
-            return
-        }
-
-        showLoader(loader, "Creating Account...")
-        // [START create_user_with_email]
-        app.auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = app.auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-                // [START_EXCLUDE]
-                hideLoader(loader)
-                // [END_EXCLUDE]
-            }
-        // [END create_user_with_email]
-    }
-
-    private fun signIn(email: String, password: String) {
-        Log.d(TAG, "signIn:$email")
-        if (!validateForm()) {
-            return
-        }
-        showLoader(loader, "Logging In...")
-        // [START sign_in_with_email]
-        app.auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = app.auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-                // [START_EXCLUDE]
-                if (!task.isSuccessful) {
-                    status.setText(R.string.auth_failed)
-                }
-                hideLoader(loader)
-                // [END_EXCLUDE]
-            }
-        // [END sign_in_with_email]
-    }
-
-    private fun signOut() {
-        app.auth.signOut()
-        app.googleSignInClient.signOut()
-        updateUI(null)
-    }
-
-    private fun sendEmailVerification() {
-        // Disable button
-        verifyEmailButton.isEnabled = false
-
-        // Send verification email
-        // [START send_email_verification]
-        val user = app.auth.currentUser
-        user?.sendEmailVerification()
-            ?.addOnCompleteListener(this) { task ->
-                // [START_EXCLUDE]
-                // Re-enable button
-                verifyEmailButton.isEnabled = true
-
-                if (task.isSuccessful) {
-                    Toast.makeText(baseContext,
-                        "Verification email sent to ${user.email} ",
-                        Toast.LENGTH_SHORT).show()
-                } else {
-                    Log.e(TAG, "sendEmailVerification", task.exception)
-                    Toast.makeText(baseContext,
-                        "Failed to send verification email.",
-                        Toast.LENGTH_SHORT).show()
-                }
-                // [END_EXCLUDE]
-            }
-        // [END send_email_verification]
-    }
-
-    private fun validateForm(): Boolean {
-        var valid = true
-
-        val email = fieldEmail.text.toString()
-        if (TextUtils.isEmpty(email)) {
-            fieldEmail.error = "Required."
-            valid = false
-        } else {
-            fieldEmail.error = null
-        }
-
-        val password = fieldPassword.text.toString()
-        if (TextUtils.isEmpty(password)) {
-            fieldPassword.error = "Required."
-            valid = false
-        } else {
-            fieldPassword.error = null
-        }
-
-        return valid
-    }
-
-    private fun updateUI(user: FirebaseUser?) {
-        hideLoader(loader)
-        if (user != null) {
-            status.text = getString(R.string.emailpassword_status_fmt,
-                user.email, user.isEmailVerified)
-            detail.text = getString(R.string.firebase_status_fmt, user.uid)
-
-            emailPasswordButtons.visibility = View.GONE
-            emailPasswordFields.visibility = View.GONE
-            signedInButtons.visibility = View.VISIBLE
-
-            verifyEmailButton.isEnabled = !user.isEmailVerified
+    private fun checkSignedIn() {
+        val auth = FirebaseAuth.getInstance()
+        if (auth.currentUser != null) {
+            // already signed in
+            app.currentUser = FirebaseAuth.getInstance().currentUser!!
             app.database = FirebaseDatabase.getInstance().reference
             app.storage = FirebaseStorage.getInstance().reference
-
             startActivity<Home>()
-        } else {
-            status.setText(R.string.signed_out)
-            detail.text = null
-
-            emailPasswordButtons.visibility = View.VISIBLE
-            emailPasswordFields.visibility = View.VISIBLE
-            signedInButtons.visibility = View.GONE
         }
+        else
+        // not signed in
+            createSignInIntent()
     }
 
-    override fun onClick(v: View) {
-        val i = v.id
-        when (i) {
-            R.id.emailCreateAccountButton -> createAccount(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.emailSignInButton -> signIn(fieldEmail.text.toString(), fieldPassword.text.toString())
-            R.id.signOutButton -> signOut()
-            R.id.verifyEmailButton -> sendEmailVerification()
-            R.id.sign_in_button -> googleSignIn()
-        }
+    private fun createSignInIntent() {
+        // [START auth_fui_create_intent]
+        // Choose authentication providers
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.PhoneBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build())
+
+        val customLayout = AuthMethodPickerLayout
+            .Builder(R.layout.login)
+            .setGoogleButtonId(R.id.googleSignInButton)
+            .setEmailButtonId(R.id.emailSignInButton)
+            .setPhoneButtonId(R.id.phoneSignInButton)
+            .build()
+
+        // Create and launch sign-in intent
+        startActivityForResult(
+            AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .setIsSmartLockEnabled(false,true) // true,true for Smart Lock
+                //.setLogo(R.drawable.login_homer)
+                .setTheme(R.style.FirebaseLoginTheme)
+                .setAuthMethodPickerLayout(customLayout)
+                .build(),
+            123)
+        // [END auth_fui_create_intent]
+
     }
 
-    companion object {
-        private const val TAG = "EmailPassword"
-        private const val RC_SIGN_IN = 9001
-    }
-
-
-    // [START onactivityresult]
-    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    // [START auth_fui_result]
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account!!)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w(TAG, "Google sign in failed", e)
-                // [START_EXCLUDE]
-                updateUI(null)
-                // [END_EXCLUDE]
+        if (requestCode == 123) {
+            val response = IdpResponse.fromResultIntent(data)
+
+            if (resultCode == Activity.RESULT_OK) {
+                // Successfully signed in
+                app.currentUser = FirebaseAuth.getInstance().currentUser!!
+                app.database = FirebaseDatabase.getInstance().reference
+                app.storage = FirebaseStorage.getInstance().reference
+
+                startActivity<Home>()
+                // ...
+            } else {
+                // Sign in failed. If response is null the user canceled the
+                // sign-in flow using the back button. Otherwise check
+                // response.getError().getErrorCode() and handle the error.
+                // ...
+                startActivity<Login>()
             }
         }
     }
-    // [END onactivityresult]
+    // [END auth_fui_result]
 
-    // [START google signin]
-    private fun googleSignIn() {
-        val signInIntent = app.googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-    // [END google signin]
+    override fun onClick(v: View) { createSignInIntent() }
 
-    // [START auth_with_google]
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.id!!)
-        // [START_EXCLUDE silent]
-        showLoader(loader, "Logging In with Google...")
-        // [END_EXCLUDE]
-
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        app.auth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithCredential:success")
-                    val user = app.auth.currentUser
-                    updateUI(user)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithCredential:failure", task.exception)
-                    Snackbar.make(main_layout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
-                    updateUI(null)
-                }
-
-                // [START_EXCLUDE]
-                hideLoader(loader)
-                // [END_EXCLUDE]
-            }
-    }
-    // [END auth_with_google]
 }

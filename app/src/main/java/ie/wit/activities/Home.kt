@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import com.firebase.ui.auth.AuthUI
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
@@ -63,7 +64,10 @@ class Home : AppCompatActivity(),
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        navView.getHeaderView(0).nav_header_email.text = app.auth.currentUser?.email
+        if(app.currentUser.email != null)
+            navView.getHeaderView(0).nav_header_email.text = app.currentUser.email
+        else
+            navView.getHeaderView(0).nav_header_email.text = "No Email Specified..."
 
         //Checking if Google User, upload google profile pic
 
@@ -140,11 +144,10 @@ class Home : AppCompatActivity(),
     }
 
     private fun signOut() {
-        app.googleSignInClient.signOut().addOnCompleteListener(this) {
-            app.auth.signOut()
-            startActivity<Login>()
-            finish()
-        }
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener { startActivity<Login>() }
+        finish()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

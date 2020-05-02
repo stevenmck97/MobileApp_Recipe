@@ -68,7 +68,7 @@ class EditFragment : Fragment(), AnkoLogger {
             showLoader(loader, "Updating Recipes on Server...")
             updateRecipesData()
             updateRecipes(editRecipes!!.uid, editRecipes!!)
-            updateUserRecipes(app.auth.currentUser!!.uid,
+            updateUserRecipes(app.currentUser.uid,
                                editRecipes!!.uid, editRecipes!!)
             activity?.toast("Recipe Updated")
         }

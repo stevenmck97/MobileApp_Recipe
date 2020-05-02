@@ -99,7 +99,7 @@ fun setMapMarker(app: RecipesApp) {
 fun getAllRecipes(app: RecipesApp) {
     val recipesList = ArrayList<RecipesModel>()
 
-    app.database.child("user-recipes").child(app.auth.currentUser!!.uid)
+    app.database.child("user-recipes").child(app.currentUser.uid)
         .addValueEventListener(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {}
 
@@ -120,7 +120,7 @@ fun getAllRecipes(app: RecipesApp) {
 fun getFavouriteRecipes(app: RecipesApp) {
     val recipesList = ArrayList<RecipesModel>()
 
-    app.database.child("user-recipes").child(app.auth.currentUser!!.uid)
+    app.database.child("user-recipes").child(app.currentUser.uid)
         .orderByChild("isfavourite")
         .equalTo(true)
         .addValueEventListener(object : ValueEventListener {

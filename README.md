@@ -16,7 +16,7 @@ The logout option in the option menu causes the app to crash if you use Google s
 You can press the back button on your phone in the home screen and be brought back to a standalone logout button.
 
 References
-A lot of the code in this project was based on both the Placemark application and the Donation Application.
+A lot of the code in this project was based on both the Placemark application and the Recipes Application.
 
 For login using Firebase I used this video to help me: https://www.youtube.com/watch?v=7SZO3bT1M0I&t=418s
 I edited the onActivityResult method to redirect you to the Home activity as long as there is a user signed in.

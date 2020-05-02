@@ -70,7 +70,7 @@ fun convertImageToBytes(imageView: ImageView) : ByteArray {
 }
 
 fun uploadImageView(app: RecipesApp, imageView: ImageView) {
-    val uid = app.auth.currentUser!!.uid
+    val uid = app.currentUser.uid
     val imageRef = app.storage.child("photos").child("${uid}.jpg")
     val uploadTask = imageRef.putBytes(convertImageToBytes(imageView))
 
@@ -129,8 +129,8 @@ fun readImageUri(resultCode: Int, data: Intent?): Uri? {
 }
 
 fun updateAllRecipes(app: RecipesApp) {
-    val userId = app.auth.currentUser!!.uid
-    val userEmail = app.auth.currentUser!!.email
+    val userId = app.currentUser.uid
+    val userEmail = app.currentUser.email
     val recipesRef = app.database.ref.child("recipes")
         .orderByChild("email")
     val userrecipesRef = app.database.ref.child("user-recipes")
@@ -162,7 +162,7 @@ fun updateAllRecipes(app: RecipesApp) {
 }
 
 fun writeImageRef(app: RecipesApp, imageRef: String) {
-    val userId = app.auth.currentUser!!.uid
+    val userId = app.currentUser.uid
     val values = UserPhotoModel(userId,imageRef).toMap()
     val childUpdates = HashMap<String, Any>()
 
@@ -173,15 +173,15 @@ fun writeImageRef(app: RecipesApp, imageRef: String) {
 fun validatePhoto(app: RecipesApp, activity: Activity) {
     var imageUri: Uri? = null
     val imageExists = app.userImage.toString().length > 0
-    val googlePhotoExists = app.auth.currentUser?.photoUrl != null
+    val googlePhotoExists = app.currentUser.photoUrl != null
 
     if(imageExists) imageUri = app.userImage
-    else if (googlePhotoExists) imageUri = app.auth.currentUser?.photoUrl!!
+    else if (googlePhotoExists) imageUri = app.currentUser.photoUrl!!
 
     if (googlePhotoExists || imageExists) {
-        if(!app.auth.currentUser?.displayName.isNullOrEmpty())
+        if(!app.currentUser.displayName.isNullOrEmpty())
             activity.navView.getHeaderView(0)
-                .nav_header_name.text = app.auth.currentUser?.displayName
+                .nav_header_name.text = app.currentUser.displayName
         else
             activity.navView.getHeaderView(0)
                 .nav_header_name.text = activity.getText(R.string.nav_header_title)
@@ -208,7 +208,7 @@ fun checkExistingPhoto(app: RecipesApp, activity: Activity) {
 
     app.userImage = "".toUri()
     app.database.child("user-photos").orderByChild("uid")
-        .equalTo(app.auth.currentUser!!.uid)
+        .equalTo(app.currentUser.uid)
         .addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot ) {
@@ -228,7 +228,7 @@ fun checkExistingPhoto(app: RecipesApp, activity: Activity) {
 
 
 fun uploadImageView2(app: RecipesApp, recipeImageView: ImageView) {
-    val uid = app.auth.currentUser!!.uid
+    val uid = app.currentUser.uid
     val imageRef = app.storage.child("photos").child("${uid}.jpg")
     val uploadTask = imageRef.putBytes(convertImageToBytes(recipeImageView))
 
@@ -280,8 +280,8 @@ fun readImageUri2(resultCode: Int, data: Intent?): Uri? {
 }
 
 fun updateAllRecipes2(app: RecipesApp) {
-    val userId = app.auth.currentUser!!.uid
-    val userEmail = app.auth.currentUser!!.email
+    val userId = app.currentUser.uid
+    val userEmail = app.currentUser.email
     val recipesRef = app.database.ref.child("recipes")
         .orderByChild("email")
     val userrecipesRef = app.database.ref.child("user-recipes")
@@ -313,7 +313,7 @@ fun updateAllRecipes2(app: RecipesApp) {
 }
 
 fun writeImageRef2(app: RecipesApp, imageRef: String) {
-    val userId = app.auth.currentUser!!.uid
+    val userId = app.currentUser.uid
     val values = RecipePhotoModel(userId,imageRef).toMap()
     val childUpdates = HashMap<String, Any>()
 
@@ -360,7 +360,7 @@ fun checkExistingPhoto2(app: RecipesApp, activity: Activity) {
 
     app.recipeImage = "".toUri()
     app.database.child("user-recipeImages").orderByChild("uid")
-        .equalTo(app.auth.currentUser!!.uid)
+        .equalTo(app.currentUser.uid)
         .addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot ) {

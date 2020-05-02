@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -92,7 +93,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
                         isfavourite = favourite,
                         latitude = app.currentLocation.latitude,
                         longitude = app.currentLocation.longitude,
-                        email = app.auth.currentUser?.email
+                        email = app.currentUser.email
                     )
                 )
                 activity?.toast("Recipe Added")
@@ -144,14 +145,14 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     override fun onResume() {
         super.onResume()
-        getAllRecipes(app.auth.currentUser?.uid)
+        getAllRecipes(app.currentUser.uid)
     }
 
     override fun onPause() {
         super.onPause()
-        if(app.auth.uid != null)
+        if(app.currentUser.uid != null)
             app.database.child("user-recipes")
-                    .child(app.auth.currentUser!!.uid)
+                    .child(app.currentUser.uid)
                     .removeEventListener(eventListener)
     }
 
@@ -159,7 +160,7 @@ class RecipeFragment : Fragment(), AnkoLogger {
         // Create new recipes at /recipes & /recipes/$uid
         showLoader(loader, "Adding Recipes to Firebase")
         info("Firebase DB Reference : $app.database")
-        val uid = app.auth.currentUser!!.uid
+        val uid = app.currentUser.uid
         val key = app.database.child("recipes").push().key
         if (key == null) {
             info("Firebase Error : Key Empty")
