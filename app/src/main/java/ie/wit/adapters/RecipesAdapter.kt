@@ -34,7 +34,8 @@ class RecipesAdapter(options: FirebaseRecyclerOptions<RecipesModel>,
                 itemView.recipeTitle.text = recipes.title
                 itemView.recipeDescription.text = recipes.description
 
-//            Picasso.get().load(recipes.recipestoreimage.toUri()).into(itemView.recipeImageView)
+
+//          Picasso.get().load(recipes.recipestoreimage.toUri()).into(itemView.recipeImageView)
 
                 if(listener is ReportAllFragment)
                     ; // Do Nothing, Don't Allow 'Clickable' Rows
