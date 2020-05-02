@@ -3,7 +3,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/food_background_1"
+    android:background="@color/colorHome"
     android:orientation="vertical"
     android:weightSum="4">
 
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/colorWhite"
+        android:background="@color/colorHome"
         android:gravity="center_vertical">
 
         <LinearLayout

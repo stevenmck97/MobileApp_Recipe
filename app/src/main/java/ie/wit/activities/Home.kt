@@ -53,7 +53,6 @@ class Home : AppCompatActivity(),
         app.locationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if(checkLocationPermissions(this)) {
-            // todo get the current location
             setCurrentLocation(app)
         }
 
@@ -169,7 +168,6 @@ class Home : AppCompatActivity(),
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (isPermissionGranted(requestCode, grantResults)) {
-            // todo get the current location
             setCurrentLocation(app)
         } else {
             // permissions denied, so use a default location

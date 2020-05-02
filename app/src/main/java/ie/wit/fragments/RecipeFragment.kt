@@ -91,19 +91,27 @@ class RecipeFragment : Fragment(), AnkoLogger {
 
     fun setButtonListener( layout: View) {
         layout.btnAdd.setOnClickListener {
+            val title = recipeTitle.text.toString()
 
-            writeNewRecipes(RecipesModel(
-            title = recipeTitle.text.toString(),
-            description = recipeDescription.text.toString(),
-            profilepic = app.userImage.toString(),
-            recipestoreimage = app.recipeImage.toString(),
-            isfavourite = favourite,
-            latitude = app.currentLocation.latitude,
-            longitude = app.currentLocation.longitude,
-            email = app.auth.currentUser?.email))
+            if (title.isEmpty()) {
+                activity?.toast("Please enter a recipe title")
+            } else {
 
-
+                writeNewRecipes(
+                    RecipesModel(
+                        title = recipeTitle.text.toString(),
+                        description = recipeDescription.text.toString(),
+                        profilepic = app.userImage.toString(),
+                        recipestoreimage = app.recipeImage.toString(),
+                        isfavourite = favourite,
+                        latitude = app.currentLocation.latitude,
+                        longitude = app.currentLocation.longitude,
+                        email = app.auth.currentUser?.email
+                    )
+                )
+                activity?.toast("Recipe Added")
             }
+        }
         }
 
 

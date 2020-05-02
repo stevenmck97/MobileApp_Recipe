@@ -19,7 +19,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
-//import com.google.firebase.quickstart.auth.R
 import ie.wit.R
 import ie.wit.main.RecipesApp
 import ie.wit.utils.createLoader

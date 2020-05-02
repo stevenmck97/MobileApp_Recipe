@@ -12,7 +12,8 @@
     <color name="homeTextWhite">#FFFFFF</color>
     <color name="textHintColor">#919191</color>
 
-
+    <color name="grey">#d3d3d3</color>
+    <color name="black">#000000</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="grey_100">#2196F3</color>
     <color name="grey_300">#E0E0E0</color>

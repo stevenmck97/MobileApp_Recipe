@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_recipe.recipeImageView
 
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.toast
 
 class EditFragment : Fragment(), AnkoLogger {
 
@@ -32,7 +33,7 @@ class EditFragment : Fragment(), AnkoLogger {
     lateinit var loader : AlertDialog
     lateinit var root: View
     var editRecipes: RecipesModel? = null
-    var favourite = false
+//    var favourite = false
 
 
 
@@ -70,8 +71,10 @@ class EditFragment : Fragment(), AnkoLogger {
             updateRecipes(editRecipes!!.uid, editRecipes!!)
             updateUserRecipes(app.auth.currentUser!!.uid,
                                editRecipes!!.uid, editRecipes!!)
+            activity?.toast("Recipe Updated")
         }
-//        setImageListener(root)
+
+        setImageListener(root)
 //          setFavouriteListener(root)
 //        setEditImageListener(root)
         return root

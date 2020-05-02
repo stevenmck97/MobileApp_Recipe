@@ -25,8 +25,6 @@ import ie.wit.main.RecipesApp
 import ie.wit.models.RecipePhotoModel
 import ie.wit.models.UserPhotoModel
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.fragment_edit.*
-import kotlinx.android.synthetic.main.fragment_edit.view.*
 import kotlinx.android.synthetic.main.home.*
 import kotlinx.android.synthetic.main.nav_header_home.view.*
 import java.io.ByteArrayOutputStream
