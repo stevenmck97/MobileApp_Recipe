@@ -15,6 +15,9 @@
     <string name="nav_header_desc">Test</string>
     <string name="action_settings">Settings</string>
 
+    <string name="splash_text">Designed by Steven McKeown</string>
+
+
     <string name="menu_recipe">Add a Recipe</string>
     <string name="menu_report">Your Recipe List</string>
     <string name="menu_favourites">Favourites</string>
