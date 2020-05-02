@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.fragment_edit.view.recipeDescription
 import kotlinx.android.synthetic.main.fragment_edit.view.recipeImageView
 import kotlinx.android.synthetic.main.fragment_edit.view.recipeTitle
 import kotlinx.android.synthetic.main.fragment_recipe.recipeImageView
-
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast

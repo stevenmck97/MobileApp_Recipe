@@ -7,37 +7,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
-
 import ie.wit.R
 import ie.wit.main.RecipesApp
 import ie.wit.models.RecipesModel
 import ie.wit.utils.*
-import jp.wasabeef.picasso.transformations.CropCircleTransformation
-import kotlinx.android.synthetic.main.fragment_about_us.*
-import kotlinx.android.synthetic.main.fragment_edit.*
-import kotlinx.android.synthetic.main.fragment_recipe.*
 import kotlinx.android.synthetic.main.fragment_recipe.recipeDescription
 import kotlinx.android.synthetic.main.fragment_recipe.recipeImageView
 import kotlinx.android.synthetic.main.fragment_recipe.recipeTitle
 import kotlinx.android.synthetic.main.fragment_recipe.view.*
-
-import kotlinx.android.synthetic.main.home.*
-import kotlinx.android.synthetic.main.nav_header_home.view.*
-//import kotlinx.android.synthetic.main.nav_header_home.view.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
-//import org.jetbrains.anko.toast
-//import java.lang.String.format
 import java.util.HashMap
 
 

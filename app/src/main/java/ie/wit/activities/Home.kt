@@ -68,6 +68,8 @@ class Home : AppCompatActivity(),
         //Checking if Google User, upload google profile pic
 
         checkExistingPhoto(app,this)
+
+        //recipe image check
         checkExistingPhoto2(app,this)
 
         navView.getHeaderView(0).imageView
@@ -82,7 +84,7 @@ class Home : AppCompatActivity(),
 
     }
 
-
+//bottom nav listener
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { item ->
             when (item.itemId) {
