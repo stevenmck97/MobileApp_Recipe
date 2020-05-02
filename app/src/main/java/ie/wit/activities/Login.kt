@@ -3,34 +3,17 @@ package ie.wit.activities
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
-import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.firebase.ui.auth.AuthMethodPickerLayout
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.SignInButton
-import com.google.android.gms.common.api.ApiException
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import ie.wit.R
 import ie.wit.main.RecipesApp
-import ie.wit.utils.createLoader
-import ie.wit.utils.hideLoader
-import ie.wit.utils.showLoader
-import kotlinx.android.synthetic.main.login.*
 import org.jetbrains.anko.startActivity
-
 class Login : AppCompatActivity(), View.OnClickListener {
 
     lateinit var app: RecipesApp

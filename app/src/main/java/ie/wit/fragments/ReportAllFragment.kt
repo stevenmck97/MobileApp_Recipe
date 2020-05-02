@@ -6,20 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.firebase.ui.database.FirebaseRecyclerOptions
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-
 import ie.wit.R
 import ie.wit.adapters.RecipesAdapter
 import ie.wit.adapters.RecipesListener
 import ie.wit.models.RecipesModel
-import ie.wit.utils.*
 import kotlinx.android.synthetic.main.fragment_report.view.*
-import org.jetbrains.anko.info
+
 
 class ReportAllFragment : ReportFragment(),
     RecipesListener {

@@ -144,7 +144,7 @@ fun addMapMarkers(dl : ArrayList<RecipesModel>, map: GoogleMap) {
     dl.forEach {
         map.addMarker(
             MarkerOptions().position(LatLng(it.latitude, it.longitude))
-                .title("${it.title} €${it.description}")
+                .title("${it.title} ${it.description}")
 //                .snippet(it.message)
                 .icon(
                     BitmapDescriptorFactory.fromResource(R.mipmap.ic_food_map))
