@@ -46,8 +46,8 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="230dp"
-            android:layout_marginTop="0dp"
+            android:layout_marginStart="173dp"
+            android:layout_marginTop="13dp"
             android:layout_toEndOf="@id/recipeDescription"
             app:srcCompat="@drawable/ic_favorite_off" />
 
